@@ -1,0 +1,2314 @@
+<!DOCTYPE html>
+<html lang="en-ZA" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sesing Foundation NPC | Extending University First-Year Mentorship to High School Learners</title>
+  <meta name="description" content="Sesing Foundation NPC (CIPC Reg. No. 2026/535520/08) is a registered South African Non-Profit Company in Thaba Nchu, Free State, extending university first-year mentorship programmes into high schools to help learners transition successfully to university." />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat (Headings), Inter (Body UI) & JetBrains Mono (Registration & Data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sapphire: {
+              50: '#F4F7FC',
+              100: '#E3ECFA',
+              200: '#C5D8F5',
+              600: '#0A47A9',
+              700: '#003594',
+              800: '#002B7F',
+              900: '#001848',
+              950: '#000E2E',
+            },
+            gold: {
+              50: '#FCF9EE',
+              100: '#F3E5AB',
+              200: '#E6CE7A',
+              400: '#D4AF37',
+              500: '#C59B27',
+              600: '#B8860B',
+              700: '#AA7C11',
+              800: '#7D5908',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            brand: ['Montserrat', 'Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+
+    // Multi-step logo fallback handler (never replaces logo with blue text placeholder)
+    function handleLogoFallback(img) {
+      const fallbacks = [
+        "https://github.com/Sesing-Foundation/Sesing-Foundation.main-website/blob/main/Sesing%20Foundation%20Logo.jpeg?raw=true",
+        "Sesing Foundation Logo.jpeg",
+        "./Sesing%20Foundation%20Logo.jpeg",
+        "https://raw.githubusercontent.com/Sesing-Foundation/Sesing-Foundation.main-website/master/Sesing%20Foundation%20Logo.jpeg"
+      ];
+      const currentStep = parseInt(img.getAttribute("data-fallback-step") || "0", 10);
+      if (currentStep < fallbacks.length) {
+        img.setAttribute("data-fallback-step", String(currentStep + 1));
+        img.src = fallbacks[currentStep];
+      } else {
+        img.onerror = null;
+      }
+    }
+    function handleLogoError(img) {
+      handleLogoFallback(img);
+    }
+  </script>
+
+  <style>
+    /* Royal Sapphire & Metallic Gold Brand Utilities */
+    .bg-sapphire-royal {
+      background-color: #001848;
+      background-image: 
+        radial-gradient(at 15% 15%, rgba(10, 71, 169, 0.45) 0px, transparent 55%),
+        radial-gradient(at 85% 80%, rgba(212, 175, 55, 0.16) 0px, transparent 50%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
+    }
+
+    .text-gold-metallic {
+      background: linear-gradient(135deg, #B8860B 0%, #D4AF37 30%, #F3E5AB 52%, #D4AF37 75%, #AA7C11 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .bg-gold-metallic {
+      background: linear-gradient(135deg, #AA7C11 0%, #D4AF37 45%, #F3E5AB 70%, #B8860B 100%);
+    }
+
+    .bg-gold-cta {
+      background: linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #AA7C11 100%);
+    }
+    .bg-gold-cta:hover {
+      background: linear-gradient(135deg, #C59B27 0%, #E6CE7A 50%, #B8860B 100%);
+    }
+  </style>
+</head>
+<body class="bg-[#F4F7FC] text-slate-800 font-sans antialiased selection:bg-sapphire-800 selection:text-gold-100">
+
+  <!-- 1. TOP STATUTORY & REGISTRATION BAR -->
+  <div class="bg-sapphire-950 text-slate-300 text-xs border-b border-gold-500/25">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-y-2">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+        <span class="inline-flex items-center gap-1.5 font-medium text-white">
+          <span class="w-2 h-2 rounded-full bg-gold-400"></span>
+          Reg: <span id="cipc-code" class="font-mono text-gold-100 font-semibold">2026/535520/08</span>
+          <button onclick="copyCipc()" class="ml-1 text-[11px] bg-sapphire-900 hover:bg-sapphire-800 text-gold-100 px-2 py-0.5 rounded border border-gold-500/30 transition" title="Copy CIPC Registration Number">
+            Copy
+          </button>
+        </span>
+        <span class="hidden md:inline text-slate-600">|</span>
+        <span class="inline-flex items-center gap-1 text-slate-200">
+          <svg class="w-3.5 h-3.5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          Thaba Nchu, Mangaung Metro, Free State
+        </span>
+        <span class="hidden lg:inline text-slate-600">|</span>
+        <span class="hidden lg:inline-flex items-center gap-1 text-slate-200">
+          <svg class="w-3.5 h-3.5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+          High School-to-University Mentorship Bridge
+        </span>
+      </div>
+
+      <div class="flex items-center gap-x-4">
+        <span class="hidden sm:inline text-slate-300">
+          Non-Profit Company (Companies Act 71 of 2008)
+        </span>
+        <button onclick="openPopiaModal()" class="text-gold-400 hover:text-gold-100 font-semibold underline underline-offset-2 transition">
+          POPIA Privacy Notice
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. PURE WHITE STICKY HEADER WITH LIVE GITHUB LOGO -->
+  <header class="sticky top-0 z-40 bg-[#FFFFFF] border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Official Logo Image inside Pure White Container -->
+        <a href="#hero" class="flex items-center gap-3 bg-[#FFFFFF] py-1">
+          <div class="bg-[#FFFFFF] p-1.5 rounded-xl border border-gold-400/50 shadow-sm flex items-center justify-center">
+            <img 
+              src="https://raw.githubusercontent.com/Sesing-Foundation/Sesing-Foundation.main-website/main/Sesing%20Foundation%20Logo.jpeg" 
+              alt="Sesing Foundation NPC Logo" 
+              class="h-12 sm:h-14 w-auto object-contain bg-[#FFFFFF]"
+              onerror="handleLogoError(this)"
+            />
+          </div>
+          <div class="hidden sm:block border-l border-slate-200 pl-3 leading-tight">
+            <div class="font-brand font-extrabold text-sm text-sapphire-800 tracking-wide">
+              SESING FOUNDATION NPC
+            </div>
+            <div class="mt-0.5 inline-flex items-center px-2 py-0.5 rounded bg-sapphire-50 border border-sapphire-200 text-[10px] font-mono font-semibold text-sapphire-800">
+              Reg: 2026/535520/08
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-700">
+          <a href="#our-model" class="hover:text-sapphire-800 transition">Our Model</a>
+          <a href="#transition-roadmap" onclick="switchToolTab('roadmap')" class="hover:text-sapphire-800 transition">Transition Roadmap</a>
+          <a href="#aps-tool" onclick="switchToolTab('aps')" class="hover:text-sapphire-800 transition">APS &amp; Readiness Tool</a>
+          <a href="#mentorship-tracks" class="hover:text-sapphire-800 transition">Mentorship Tracks</a>
+          <a href="#governance" class="hover:text-sapphire-800 transition">Governance</a>
+          <a href="#partner" class="hover:text-sapphire-800 transition">Partner With Us</a>
+        </nav>
+
+        <!-- Action Buttons -->
+        <div class="hidden sm:flex items-center gap-3">
+          <a href="#partner" onclick="selectFormType('mentor')" class="px-3.5 py-2 rounded-lg text-xs font-semibold text-sapphire-800 bg-sapphire-50 hover:bg-sapphire-100 border border-sapphire-200 transition">
+            Become a Mentor
+          </a>
+          <a href="#partner" onclick="selectFormType('school')" class="px-4 py-2.5 rounded-lg text-xs font-bold text-sapphire-950 bg-gold-cta shadow-sm transition flex items-center gap-1.5">
+            <span>Book a School Workshop</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-lg text-sapphire-800 hover:bg-sapphire-50 focus:outline-none" aria-label="Toggle Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-[#FFFFFF] border-b border-slate-200 px-4 pt-2 pb-5 space-y-2">
+      <div class="pb-2 mb-2 border-b border-slate-100 flex items-center justify-between">
+        <span class="text-xs font-bold text-sapphire-900">SESING FOUNDATION NPC</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-sapphire-50 text-sapphire-800 border border-sapphire-200">Reg: 2026/535520/08</span>
+      </div>
+      <a href="#our-model" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-sapphire-50">Our Model</a>
+      <a href="#transition-roadmap" onclick="switchToolTab('roadmap'); toggleMobileMenu();" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-sapphire-50">Transition Roadmap</a>
+      <a href="#aps-tool" onclick="switchToolTab('aps'); toggleMobileMenu();" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-sapphire-50">APS &amp; Readiness Tool</a>
+      <a href="#mentorship-tracks" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-sapphire-50">Mentorship Tracks</a>
+      <a href="#governance" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-sapphire-50">Governance</a>
+      <a href="#partner" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-sapphire-50">Partner With Us</a>
+      <div class="pt-2 flex flex-col gap-2">
+        <a href="#partner" onclick="selectFormType('mentor'); toggleMobileMenu();" class="w-full text-center py-2.5 rounded-lg text-xs font-semibold text-sapphire-800 bg-sapphire-50 border border-sapphire-200">
+          Apply as a University Mentor
+        </a>
+        <a href="#partner" onclick="selectFormType('school'); toggleMobileMenu();" class="w-full text-center py-2.5 rounded-lg text-xs font-bold text-sapphire-950 bg-gold-cta">
+          Request High School Outreach
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. HERO SECTION WITH PURE WHITE BRAND SHOWCASE CARD -->
+  <section id="hero" class="bg-sapphire-royal text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column: High School to University Mentorship Headline -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-sapphire-800/80 border border-gold-400/40 backdrop-blur-sm">
+            <span class="px-2 py-0.5 text-[11px] font-mono font-bold uppercase rounded bg-gold-cta text-sapphire-950">Thaba Nchu &amp; Free State</span>
+            <span class="text-xs text-gold-100 font-medium">High School-to-University Mentorship Initiative</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15] text-white">
+            Extending University First-Year Mentorship
+            <span class="text-gold-metallic block mt-1">
+              to High School Learners.
+            </span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl font-normal">
+            Every South African university runs an established First-Year Mentorship Programme on campus. Sesing Foundation NPC extends the reach of those trained university mentors backwards into Grade 11 and Grade 12 classrooms so mentorship begins before learners apply, write matric finals, or step into their first lecture hall.
+          </p>
+
+          <!-- Primary CTA Row -->
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <a href="#our-model" class="px-6 py-3.5 rounded-xl bg-gold-cta text-sapphire-950 font-bold text-sm shadow-lg shadow-black/25 transition flex items-center gap-2">
+              <span>Explore the Extended Mentor Model</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+            </a>
+            <a href="#aps-tool" onclick="switchToolTab('aps')" class="px-6 py-3.5 rounded-xl bg-sapphire-800/70 hover:bg-sapphire-700/80 text-white font-semibold text-sm border border-gold-400/30 backdrop-blur-sm transition flex items-center gap-2">
+              <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+              <span>Calculate Your NSC APS Score</span>
+            </a>
+          </div>
+
+          <!-- Core Model Highlights -->
+          <div class="pt-6 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-slate-200">
+            <div class="flex items-start gap-2.5">
+              <div class="w-5 h-5 rounded-md bg-gold-400/20 border border-gold-400/40 flex items-center justify-center text-gold-100 font-bold shrink-0 mt-0.5">01</div>
+              <div>
+                <div class="font-semibold text-white">University Peer Mentors</div>
+                <div class="text-slate-300">Trained First-Year Campus Mentors</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <div class="w-5 h-5 rounded-md bg-gold-400/20 border border-gold-400/40 flex items-center justify-center text-gold-100 font-bold shrink-0 mt-0.5">02</div>
+              <div>
+                <div class="font-semibold text-white">Grade 11 &amp; 12 Classrooms</div>
+                <div class="text-slate-300">Pre-University Guidance &amp; APS Prep</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <div class="w-5 h-5 rounded-md bg-gold-400/20 border border-gold-400/40 flex items-center justify-center text-gold-100 font-bold shrink-0 mt-0.5">03</div>
+              <div>
+                <div class="font-semibold text-white">First-Year Landing Bridge</div>
+                <div class="text-slate-300">Preventing First-Year Dropout</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Pure White Brand Card Displaying Official Logo & Core Metrics -->
+        <div class="lg:col-span-5">
+          <div class="bg-[#FFFFFF] text-slate-800 rounded-2xl shadow-2xl border-2 border-gold-400 overflow-hidden">
+            
+            <!-- Pure White Container so JPEG Logo Blends Seamlessly -->
+            <div class="bg-[#FFFFFF] px-6 pt-7 pb-5 border-b border-slate-100 text-center">
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase bg-sapphire-50 text-sapphire-800 border border-sapphire-200 mb-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-sapphire-800"></span>
+                Official Institutional Identity
+              </div>
+              
+              <!-- Direct Raw GitHub Logo Image inside Pure White Frame -->
+              <div class="bg-[#FFFFFF] p-4 rounded-xl border border-gold-400/40 shadow-sm flex items-center justify-center mx-auto max-w-[300px]">
+                <img 
+                  src="https://raw.githubusercontent.com/Sesing-Foundation/Sesing-Foundation.main-website/main/Sesing%20Foundation%20Logo.jpeg" 
+                  alt="Sesing Foundation NPC Official Logo" 
+                  class="w-full max-w-[260px] h-auto object-contain mx-auto bg-[#FFFFFF]"
+                  onerror="handleLogoError(this)"
+                />
+              </div>
+
+              <div class="mt-3 flex items-center justify-center gap-2 text-[11px] font-mono text-slate-500">
+                <span>CIPC Reg: 2026/535520/08</span>
+                <span>&bull;</span>
+                <span class="text-sapphire-800 font-semibold">Thaba Nchu, Free State</span>
+              </div>
+            </div>
+
+            <!-- Card Body: Core Metrics & Model Summary Tabs -->
+            <div class="p-6 bg-[#FFFFFF] space-y-4">
+              <!-- Core Metrics Strip -->
+              <div class="grid grid-cols-3 gap-2 text-center">
+                <div class="p-2.5 rounded-xl bg-[#F4F7FC] border border-sapphire-100">
+                  <div class="text-base font-extrabold font-mono text-sapphire-800">Gr 11-12</div>
+                  <div class="text-[10px] font-semibold text-slate-500 uppercase">Target Learners</div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-[#F4F7FC] border border-sapphire-100">
+                  <div class="text-base font-extrabold font-mono text-gold-700">4 Stages</div>
+                  <div class="text-[10px] font-semibold text-slate-500 uppercase">Transition Path</div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-[#F4F7FC] border border-sapphire-100">
+                  <div class="text-base font-extrabold font-mono text-sapphire-800">8 Streams</div>
+                  <div class="text-[10px] font-semibold text-slate-500 uppercase">Faculty Tracks</div>
+                </div>
+              </div>
+
+              <!-- Interactive Summary Tabs -->
+              <div class="grid grid-cols-3 gap-1.5 bg-sapphire-50 p-1 rounded-xl text-xs font-semibold border border-sapphire-100">
+                <button onclick="switchBriefTab('innovation')" id="brief-tab-innovation" class="py-2 px-2 rounded-lg bg-sapphire-800 text-white shadow-sm transition">
+                  The Bridge
+                </button>
+                <button onclick="switchBriefTab('roots')" id="brief-tab-roots" class="py-2 px-2 rounded-lg text-sapphire-800 hover:bg-white transition">
+                  Our Roots
+                </button>
+                <button onclick="switchBriefTab('status')" id="brief-tab-status" class="py-2 px-2 rounded-lg text-sapphire-800 hover:bg-white transition">
+                  Statutory Info
+                </button>
+              </div>
+
+              <!-- Tab Content 1: The Bridge -->
+              <div id="brief-content-innovation" class="space-y-2 text-xs text-slate-600 leading-relaxed">
+                <p>
+                  First-year university mentorship usually starts during campus orientation week. By then, many rural and township matriculants have already missed application deadlines, chosen mismatched courses, or arrived overwhelmed.
+                </p>
+                <p>
+                  <strong>Our Solution:</strong> We mobilise senior university students who already serve in university First-Year Mentorship Programmes and connect them directly with Grade 11 and Grade 12 learners in high school.
+                </p>
+              </div>
+
+              <!-- Tab Content 2: Our Roots -->
+              <div id="brief-content-roots" class="hidden space-y-2 text-xs text-slate-600 leading-relaxed">
+                <p>
+                  Established in Thaba Nchu by <strong>Tebogo Frederick Sesing</strong> and educator <strong>Dimakatso Christinah Sesing</strong>, our work is grounded in local Free State schools including <strong>Moroka Senior Secondary School</strong> and <strong>Tawana Primary School</strong>.
+                </p>
+                <p>
+                  We connect university mentors with learners in the communities they grew up in, proving that academic excellence at university is achievable.
+                </p>
+              </div>
+
+              <!-- Tab Content 3: Statutory Info -->
+              <div id="brief-content-status" class="hidden space-y-2 text-xs">
+                <div class="flex items-center justify-between py-1.5 border-b border-slate-100">
+                  <span class="text-slate-500">Entity Name:</span>
+                  <span class="font-semibold text-sapphire-900">Sesing Foundation NPC</span>
+                </div>
+                <div class="flex items-center justify-between py-1.5 border-b border-slate-100">
+                  <span class="text-slate-500">CIPC Registration:</span>
+                  <span class="font-mono font-semibold text-sapphire-900">2026/535520/08</span>
+                </div>
+                <div class="flex items-center justify-between py-1.5 border-b border-slate-100">
+                  <span class="text-slate-500">Governing Statute:</span>
+                  <span class="font-semibold text-sapphire-800">Companies Act 71 of 2008</span>
+                </div>
+                <div class="flex items-center justify-between py-1.5">
+                  <span class="text-slate-500">Learner Privacy:</span>
+                  <span class="font-mono font-semibold text-gold-700">POPIA Compliant</span>
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span class="text-slate-500">Focus: <strong class="text-sapphire-900">Matric to First-Year Success</strong></span>
+                <a href="#our-model" class="text-sapphire-800 hover:text-gold-700 font-bold flex items-center gap-1">
+                  <span>How It Works</span>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. THE EXTENDED MENTORSHIP ARCHITECTURE (HOW IT WORKS) -->
+  <section id="our-model" class="py-20 bg-[#FFFFFF] border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sapphire-800/10 border border-sapphire-800/20 text-sapphire-800 text-xs font-bold uppercase tracking-wider">
+          The Extended First-Year Mentorship Architecture
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-sapphire-900 mt-3 tracking-tight">
+          Why Stop Mentorship at the University Gate?
+        </h2>
+        <p class="text-slate-600 mt-3 text-base leading-relaxed">
+          South African universities invest heavily in First-Year Experience and Mentorship Programmes to support new students once they arrive on campus. Sesing Foundation NPC bridges the gap between high school and higher education by extending those trained university mentors directly to high school learners before matric ends.
+        </p>
+      </div>
+
+      <!-- 3-Step Visual Breakdown -->
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
+        
+        <!-- Step 1: University First-Year Mentor Network -->
+        <div class="bg-[#F4F7FC] rounded-2xl border-2 border-sapphire-200 p-7 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-lg bg-sapphire-800 text-gold-100 font-mono text-xs font-bold uppercase">
+                Step 01 &bull; Campus Network
+              </span>
+              <div class="w-11 h-11 rounded-xl bg-[#FFFFFF] border border-sapphire-200 text-sapphire-800 flex items-center justify-center font-bold">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-extrabold text-sapphire-900 mt-5">
+              1. University First-Year Mentor Network
+            </h3>
+            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+              We partner with senior undergraduate and postgraduate students who already serve as trained mentors within existing university First-Year Mentorship Programmes across South African institutions.
+            </p>
+
+            <ul class="mt-5 space-y-2.5 text-xs text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-gold-600 font-bold mt-0.5">&bull;</span>
+                <span><strong>Pre-Trained Peer Leaders:</strong> Mentors already possess university orientation training, faculty insight, and peer support skills.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold-600 font-bold mt-0.5">&bull;</span>
+                <span><strong>Alumni Giving Back:</strong> University students from townships and rural towns return to mentor learners in their home provinces.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold-600 font-bold mt-0.5">&bull;</span>
+                <span><strong>Real Academic Experience:</strong> Mentors share honest, practical insights on university workloads, laboratory sessions, and campus life.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-sapphire-200/60 flex items-center justify-between text-xs font-semibold text-sapphire-800">
+            <span>Source: Existing Campus Programmes</span>
+            <span>Step 1 of 3 &rarr;</span>
+          </div>
+        </div>
+
+        <!-- Step 2: High School Pre-Transition Outreach -->
+        <div class="bg-[#FFFFFF] rounded-2xl border-2 border-gold-400 p-7 flex flex-col justify-between shadow-md hover:shadow-lg transition">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-lg bg-gold-cta text-sapphire-950 font-mono text-xs font-bold uppercase">
+                Step 02 &bull; High School Bridge
+              </span>
+              <div class="w-11 h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-700 flex items-center justify-center font-bold">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-extrabold text-sapphire-900 mt-5">
+              2. High School Pre-Transition Outreach
+            </h3>
+            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+              Instead of waiting for learners to reach university, we extend these trained university mentors into Grade 11 and Grade 12 classrooms at high schools such as <strong>Moroka Senior Secondary School</strong>, alongside foundational academic aspiration outreach at <strong>Tawana Primary School</strong> in Thaba Nchu.
+            </p>
+
+            <ul class="mt-5 space-y-2.5 text-xs text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-gold-600 font-bold mt-0.5">&bull;</span>
+                <span><strong>APS &amp; Degree Matching:</strong> Helping learners calculate their Admission Point Score (APS) and select realistic degree and diploma options.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold-600 font-bold mt-0.5">&bull;</span>
+                <span><strong>University &amp; NSFAS Applications:</strong> Guided support for online university applications, residence booking, and financial aid readiness.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold-600 font-bold mt-0.5">&bull;</span>
+                <span><strong>Academic Literacy &amp; Exam Discipline:</strong> Equipping Grade 11 and 12 learners with university-calibre study techniques and past-paper strategies.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-gold-800">
+            <span>Focus: Moroka Senior Secondary &amp; Thaba Nchu</span>
+            <span>Step 2 of 3 &rarr;</span>
+          </div>
+        </div>
+
+        <!-- Step 3: Seamless First-Year Landing -->
+        <div class="bg-[#F4F7FC] rounded-2xl border-2 border-sapphire-200 p-7 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-lg bg-sapphire-900 text-gold-400 font-mono text-xs font-bold uppercase">
+                Step 03 &bull; First-Year Success
+              </span>
+              <div class="w-11 h-11 rounded-xl bg-[#FFFFFF] border border-sapphire-200 text-sapphire-800 flex items-center justify-center font-bold">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-extrabold text-sapphire-900 mt-5">
+              3. Seamless First-Year Campus Landing
+            </h3>
+            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+              When matriculants pass and arrive on campus for their first year, they do not arrive as strangers. They transition directly into the university's existing First-Year Mentorship Programme already connected to peer mentors in their faculty.
+            </p>
+
+            <ul class="mt-5 space-y-2.5 text-xs text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-gold-600 font-bold mt-0.5">&bull;</span>
+                <span><strong>Eliminating First-Year Shock:</strong> Learners already understand lecture pacing, learning management systems, and faculty expectations.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold-600 font-bold mt-0.5">&bull;</span>
+                <span><strong>Warm Handover on Campus:</strong> Pre-existing relationships with first-year mentors reduce isolation and early academic dropout.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold-600 font-bold mt-0.5">&bull;</span>
+                <span><strong>The Mentorship Cycle Continues:</strong> Successful first-year students go on to become campus mentors who return to mentor their high schools.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-sapphire-200/60 flex items-center justify-between text-xs font-semibold text-sapphire-800">
+            <span>Outcome: Higher First-Year Retention</span>
+            <span>Complete Continuum</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. INTERACTIVE MATRIC-TO-UNIVERSITY TRANSITION ROADMAP & NSC APS CALCULATOR -->
+  <section id="transition-roadmap" class="py-20 bg-[#F4F7FC]">
+    <div id="aps-tool" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-gold-50 border border-gold-200 text-gold-800 text-xs font-bold uppercase tracking-wider">
+            Interactive Learner &amp; Educator Toolkit
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-sapphire-900 mt-3 tracking-tight">
+            Transition Roadmap &amp; Live NSC APS Calculator
+          </h2>
+          <p class="text-slate-600 mt-3 text-base leading-relaxed">
+            Switch between our 4-Stage High School-to-University Transition Roadmap and our live National Senior Certificate (NSC) Admission Point Score (APS) Calculator to see how university mentors guide learners at each milestone.
+          </p>
+        </div>
+
+        <!-- Main Tool Switcher Tabs -->
+        <div class="inline-flex p-1.5 rounded-xl bg-[#FFFFFF] border border-slate-200 shadow-sm shrink-0">
+          <button onclick="switchToolTab('roadmap')" id="tool-tab-roadmap" class="px-4 py-2.5 rounded-lg text-xs font-bold text-sapphire-800 hover:bg-sapphire-50 transition">
+            1. 4-Stage Transition Roadmap
+          </button>
+          <button onclick="switchToolTab('aps')" id="tool-tab-aps" class="px-4 py-2.5 rounded-lg text-xs font-bold bg-sapphire-800 text-white shadow-sm transition">
+            2. All-Subject NSC APS &amp; Stream Matcher
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 1: INTERACTIVE 4-STAGE TRANSITION ROADMAP -->
+      <div id="tool-panel-roadmap" class="hidden mt-10 bg-[#FFFFFF] rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+        <div class="text-xs font-mono uppercase tracking-wider text-sapphire-800 font-bold">
+          Click Any Stage Below to Inspect What University Mentors Cover With High School Learners:
+        </div>
+
+        <!-- 4 Stage Selector Buttons -->
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <button onclick="selectRoadmapStage(1)" id="stage-btn-1" class="text-left p-4 rounded-xl border-2 border-gold-500 bg-gold-50/70 shadow-sm transition">
+            <div class="text-[11px] font-mono uppercase text-gold-800 font-bold">Stage 01 &bull; Grade 11 &amp; 12</div>
+            <div class="text-sm font-extrabold text-sapphire-900 mt-1">Grade 11/12 Academic Alignment</div>
+            <div class="text-xs text-slate-600 mt-1">Subject Profiling &amp; APS Targets</div>
+          </button>
+
+          <button onclick="selectRoadmapStage(2)" id="stage-btn-2" class="text-left p-4 rounded-xl border border-slate-200 bg-[#F4F7FC] hover:border-sapphire-800 transition">
+            <div class="text-[11px] font-mono uppercase text-slate-500 font-bold">Stage 02 &bull; Grade 12 (Q1-Q2)</div>
+            <div class="text-sm font-extrabold text-sapphire-900 mt-1">University &amp; NSFAS Application Triage</div>
+            <div class="text-xs text-slate-600 mt-1">Faculty Choices, NBTs &amp; Funding</div>
+          </button>
+
+          <button onclick="selectRoadmapStage(3)" id="stage-btn-3" class="text-left p-4 rounded-xl border border-slate-200 bg-[#F4F7FC] hover:border-sapphire-800 transition">
+            <div class="text-[11px] font-mono uppercase text-slate-500 font-bold">Stage 03 &bull; Grade 12 (Q3-Q4)</div>
+            <div class="text-sm font-extrabold text-sapphire-900 mt-1">Pre-Orientation Bridging</div>
+            <div class="text-xs text-slate-600 mt-1">Academic Literacy &amp; Final Exams</div>
+          </button>
+
+          <button onclick="selectRoadmapStage(4)" id="stage-btn-4" class="text-left p-4 rounded-xl border border-slate-200 bg-[#F4F7FC] hover:border-sapphire-800 transition">
+            <div class="text-[11px] font-mono uppercase text-slate-500 font-bold">Stage 04 &bull; Jan - Feb</div>
+            <div class="text-sm font-extrabold text-sapphire-900 mt-1">First-Year Campus Integration</div>
+            <div class="text-xs text-slate-600 mt-1">Registration &amp; Campus Handover</div>
+          </button>
+        </div>
+
+        <!-- Stage Detail Display Box -->
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#F4F7FC] rounded-2xl border border-sapphire-100 p-6 sm:p-8">
+          <div class="lg:col-span-7 space-y-4">
+            <span id="stage-badge" class="inline-block text-[11px] font-mono font-bold uppercase px-3 py-1 rounded bg-gold-100 text-gold-800">
+              Stage 01 &bull; Grade 11/12 Academic Alignment
+            </span>
+            <h3 id="stage-title" class="text-2xl font-extrabold text-sapphire-900">
+              Aligning Grade 11 &amp; 12 Subject Performance With University Admission Benchmarks
+            </h3>
+            <p id="stage-description" class="text-sm text-slate-600 leading-relaxed">
+              Many high school learners only realise in Grade 12 that South African universities use final Grade 11 marks to grant initial conditional offers. Our extended university mentors engage Grade 11 and Grade 12 learners early so they understand how subject percentages translate into Admission Point Scores (APS).
+            </p>
+            <div class="pt-2">
+              <div class="text-xs font-mono uppercase text-sapphire-800 font-bold mb-2.5">What University Mentors Cover in This Stage:</div>
+              <ul id="stage-deliverables" class="space-y-2 text-xs text-slate-700">
+                <li class="flex items-start gap-2">
+                  <span class="text-gold-600 font-bold">&bull;</span>
+                  <span>Understanding how Grade 11 final promotion results determine conditional university acceptance in early Grade 12.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-gold-600 font-bold">&bull;</span>
+                  <span>Mapping subject combinations (such as Mathematics, Physical Sciences, Life Sciences, Geography, and Accounting) to specific university faculties.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-gold-600 font-bold">&bull;</span>
+                  <span>Introducing university-style active recall, past-paper analysis, and time management habits before matric finals begin.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 bg-sapphire-900 text-white rounded-xl p-6 border border-gold-400/40 space-y-4">
+            <div class="text-xs font-mono uppercase text-gold-400 font-bold">Mentor Session Outcome</div>
+            <p id="stage-outcome" class="text-sm text-slate-200 leading-relaxed">
+              Every participating learner completes a Personal University Target Sheet listing three realistic degree or diploma pathways, the exact APS required for each, and a subject improvement plan.
+            </p>
+            <div class="pt-3 border-t border-white/15 flex items-center justify-between text-xs">
+              <span class="text-gold-100 font-mono" id="stage-timing">Timing: Grade 11 &amp; Early Grade 12</span>
+              <a href="#partner" onclick="selectFormType('school')" class="text-gold-400 hover:underline font-bold">Request This Workshop &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: ALL-SUBJECT SOUTH AFRICAN NSC APS & EMBEDDED STREAM MATCHER -->
+      <div id="tool-panel-aps" class="mt-10 bg-[#FFFFFF] rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+        
+        <!-- Quick Learner Profile Presets -->
+        <div class="pb-6 mb-6 border-b border-slate-200">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <span class="text-xs font-mono uppercase tracking-wider text-sapphire-800 font-bold">
+              Quick Test Profiles (Click to Load Matric Subject Combination &amp; APS Tier):
+            </span>
+            <span class="text-[11px] font-mono text-slate-500">
+              Includes all official DBE NSC Languages, Mathematics options, Life Orientation &amp; Electives
+            </span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="applyLearnerPreset('biomed')" class="px-3 py-2 rounded-lg text-xs font-semibold bg-sapphire-50 hover:bg-sapphire-800 hover:text-white text-sapphire-900 border border-sapphire-200 transition">
+              Biomedical &amp; Health Sciences Profile (APS 37)
+            </button>
+            <button type="button" onclick="applyLearnerPreset('engineering')" class="px-3 py-2 rounded-lg text-xs font-semibold bg-sapphire-50 hover:bg-sapphire-800 hover:text-white text-sapphire-900 border border-sapphire-200 transition">
+              Engineering &amp; Technical Sciences Profile (APS 33)
+            </button>
+            <button type="button" onclick="applyLearnerPreset('accounting')" class="px-3 py-2 rounded-lg text-xs font-semibold bg-sapphire-50 hover:bg-sapphire-800 hover:text-white text-sapphire-900 border border-sapphire-200 transition">
+              Chartered Accounting &amp; Commerce Profile (APS 34)
+            </button>
+            <button type="button" onclick="applyLearnerPreset('law')" class="px-3 py-2 rounded-lg text-xs font-semibold bg-sapphire-50 hover:bg-sapphire-800 hover:text-white text-sapphire-900 border border-sapphire-200 transition">
+              Law, Humanities &amp; Education Profile (APS 29)
+            </button>
+            <button type="button" onclick="applyLearnerPreset('tourism')" class="px-3 py-2 rounded-lg text-xs font-semibold bg-sapphire-50 hover:bg-sapphire-800 hover:text-white text-sapphire-900 border border-sapphire-200 transition">
+              Tourism, Services &amp; TVET Diploma Profile (APS 22)
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Left 7 Cols: All-Inclusive Matric Subject & Percentage Selectors -->
+          <div class="lg:col-span-7 space-y-4">
+            <div>
+              <span class="text-xs font-mono uppercase text-sapphire-800 font-bold">Department of Basic Education (DBE) NSC Curriculum</span>
+              <h3 class="text-xl font-extrabold text-sapphire-900 mt-1">
+                Select Your Matric Subjects &amp; Enter Your Percentage Marks
+              </h3>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                South African universities compute your Admission Point Score (APS) out of 42 using your 6 best qualifying 20-credit subjects. Life Orientation is compulsory for your statutory NSC pass tier and is verified separately below.
+              </p>
+            </div>
+
+            <!-- Compulsory Subjects Grid (Subjects 1 to 4) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              <!-- Subject 1: Official Home Language -->
+              <div class="p-4 rounded-xl bg-[#F4F7FC] border border-sapphire-100 space-y-2">
+                <div class="flex justify-between items-center text-xs font-bold text-sapphire-900">
+                  <span>1. Home Language (Compulsory)</span>
+                  <span id="subj-1-badge" class="font-mono text-[11px] px-2 py-0.5 rounded bg-sapphire-800 text-gold-100">Level 6 (72%)</span>
+                </div>
+                <select id="subj-1-name" onchange="calculateAPS()" class="w-full px-2.5 py-2 rounded-lg border border-slate-300 text-xs font-medium bg-[#FFFFFF] focus:outline-none focus:ring-2 focus:ring-sapphire-800">
+                  <option value="Setswana Home Language" selected>Setswana Home Language</option>
+                  <option value="Sesotho Home Language">Sesotho Home Language</option>
+                  <option value="English Home Language">English Home Language</option>
+                  <option value="Afrikaans Home Language">Afrikaans Home Language</option>
+                  <option value="isiZulu Home Language">isiZulu Home Language</option>
+                  <option value="isiXhosa Home Language">isiXhosa Home Language</option>
+                  <option value="Sepedi Home Language">Sepedi Home Language</option>
+                  <option value="Xitsonga Home Language">Xitsonga Home Language</option>
+                  <option value="SiSwati Home Language">SiSwati Home Language</option>
+                  <option value="Tshivenda Home Language">Tshivenda Home Language</option>
+                  <option value="isiNdebele Home Language">isiNdebele Home Language</option>
+                  <option value="South African Sign Language Home Language">South African Sign Language Home Language</option>
+                </select>
+                <div class="flex items-center gap-2">
+                  <input type="range" id="subj-1-slider" min="0" max="100" value="72" oninput="syncSubjInput(1, this.value)" class="w-full accent-sapphire-800" />
+                  <input type="number" id="subj-1" min="0" max="100" value="72" oninput="syncSubjInput(1, this.value)" class="w-16 px-2 py-1 rounded border border-slate-300 text-xs font-mono text-center bg-[#FFFFFF]" />
+                </div>
+              </div>
+
+              <!-- Subject 2: First Additional Language -->
+              <div class="p-4 rounded-xl bg-[#F4F7FC] border border-sapphire-100 space-y-2">
+                <div class="flex justify-between items-center text-xs font-bold text-sapphire-900">
+                  <span>2. First Additional Language</span>
+                  <span id="subj-2-badge" class="font-mono text-[11px] px-2 py-0.5 rounded bg-sapphire-800 text-gold-100">Level 6 (74%)</span>
+                </div>
+                <select id="subj-2-name" onchange="calculateAPS()" class="w-full px-2.5 py-2 rounded-lg border border-slate-300 text-xs font-medium bg-[#FFFFFF] focus:outline-none focus:ring-2 focus:ring-sapphire-800">
+                  <option value="English First Additional Language (FAL)" selected>English First Additional Language (FAL)</option>
+                  <option value="Afrikaans First Additional Language (FAL)">Afrikaans First Additional Language (FAL)</option>
+                  <option value="Setswana First Additional Language (FAL)">Setswana First Additional Language (FAL)</option>
+                  <option value="Sesotho First Additional Language (FAL)">Sesotho First Additional Language (FAL)</option>
+                  <option value="isiZulu First Additional Language (FAL)">isiZulu First Additional Language (FAL)</option>
+                  <option value="isiXhosa First Additional Language (FAL)">isiXhosa First Additional Language (FAL)</option>
+                  <option value="Sepedi First Additional Language (FAL)">Sepedi First Additional Language (FAL)</option>
+                  <option value="Xitsonga First Additional Language (FAL)">Xitsonga First Additional Language (FAL)</option>
+                  <option value="SiSwati First Additional Language (FAL)">SiSwati First Additional Language (FAL)</option>
+                  <option value="Tshivenda First Additional Language (FAL)">Tshivenda First Additional Language (FAL)</option>
+                  <option value="isiNdebele First Additional Language (FAL)">isiNdebele First Additional Language (FAL)</option>
+                </select>
+                <div class="flex items-center gap-2">
+                  <input type="range" id="subj-2-slider" min="0" max="100" value="74" oninput="syncSubjInput(2, this.value)" class="w-full accent-sapphire-800" />
+                  <input type="number" id="subj-2" min="0" max="100" value="74" oninput="syncSubjInput(2, this.value)" class="w-16 px-2 py-1 rounded border border-slate-300 text-xs font-mono text-center bg-[#FFFFFF]" />
+                </div>
+              </div>
+
+              <!-- Subject 3: Mathematical Requirement -->
+              <div class="p-4 rounded-xl bg-[#F4F7FC] border border-sapphire-100 space-y-2">
+                <div class="flex justify-between items-center text-xs font-bold text-sapphire-900">
+                  <span>3. Mathematical Requirement</span>
+                  <span id="subj-3-badge" class="font-mono text-[11px] px-2 py-0.5 rounded bg-sapphire-800 text-gold-100">Level 6 (71%)</span>
+                </div>
+                <select id="subj-3-name" onchange="calculateAPS()" class="w-full px-2.5 py-2 rounded-lg border border-slate-300 text-xs font-medium bg-[#FFFFFF] focus:outline-none focus:ring-2 focus:ring-sapphire-800">
+                  <option value="Mathematics" selected>Mathematics (Core)</option>
+                  <option value="Technical Mathematics">Technical Mathematics</option>
+                  <option value="Mathematical Literacy">Mathematical Literacy</option>
+                </select>
+                <div class="flex items-center gap-2">
+                  <input type="range" id="subj-3-slider" min="0" max="100" value="71" oninput="syncSubjInput(3, this.value)" class="w-full accent-sapphire-800" />
+                  <input type="number" id="subj-3" min="0" max="100" value="71" oninput="syncSubjInput(3, this.value)" class="w-16 px-2 py-1 rounded border border-slate-300 text-xs font-mono text-center bg-[#FFFFFF]" />
+                </div>
+              </div>
+
+              <!-- Subject 4: Life Orientation (Compulsory 10-Credit Subject) -->
+              <div class="p-4 rounded-xl bg-gold-50/70 border border-gold-300 space-y-2">
+                <div class="flex justify-between items-center text-xs font-bold text-sapphire-900">
+                  <span>4. Life Orientation (Statutory)</span>
+                  <span id="subj-lo-badge" class="font-mono text-[11px] px-2 py-0.5 rounded bg-gold-700 text-white">Level 6 (78% &bull; Pass OK)</span>
+                </div>
+                <div class="text-[11px] text-slate-600 bg-[#FFFFFF] px-2.5 py-1.5 rounded-lg border border-gold-200">
+                  Compulsory for NSC pass verification; excluded from 42-point APS total.
+                </div>
+                <div class="flex items-center gap-2">
+                  <input type="range" id="subj-lo-slider" min="0" max="100" value="78" oninput="syncSubjInput('lo', this.value)" class="w-full accent-gold-600" />
+                  <input type="number" id="subj-lo" min="0" max="100" value="78" oninput="syncSubjInput('lo', this.value)" class="w-16 px-2 py-1 rounded border border-slate-300 text-xs font-mono text-center bg-[#FFFFFF]" />
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Compulsory Elective Subjects (Subjects 5, 6, 7) + Optional 8th Subject -->
+            <div class="pt-2">
+              <div class="text-xs font-mono uppercase text-sapphire-800 font-bold mb-2.5">
+                NSC 20-Credit Elective Subjects (All Official DBE Categories Included):
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <!-- Subject 5: Elective 1 -->
+                <div class="p-4 rounded-xl bg-[#F4F7FC] border border-sapphire-100 space-y-2">
+                  <div class="flex justify-between items-center text-xs font-bold text-sapphire-900">
+                    <span>5. Elective Subject 1</span>
+                    <span id="subj-4-badge" class="font-mono text-[11px] px-2 py-0.5 rounded bg-sapphire-800 text-gold-100">Level 6 (75%)</span>
+                  </div>
+                  <select id="subj-4-name" onchange="calculateAPS()" class="w-full px-2.5 py-2 rounded-lg border border-slate-300 text-xs font-medium bg-[#FFFFFF] focus:outline-none focus:ring-2 focus:ring-sapphire-800"></select>
+                  <div class="flex items-center gap-2">
+                    <input type="range" id="subj-4-slider" min="0" max="100" value="75" oninput="syncSubjInput(4, this.value)" class="w-full accent-sapphire-800" />
+                    <input type="number" id="subj-4" min="0" max="100" value="75" oninput="syncSubjInput(4, this.value)" class="w-16 px-2 py-1 rounded border border-slate-300 text-xs font-mono text-center bg-[#FFFFFF]" />
+                  </div>
+                </div>
+
+                <!-- Subject 6: Elective 2 -->
+                <div class="p-4 rounded-xl bg-[#F4F7FC] border border-sapphire-100 space-y-2">
+                  <div class="flex justify-between items-center text-xs font-bold text-sapphire-900">
+                    <span>6. Elective Subject 2</span>
+                    <span id="subj-5-badge" class="font-mono text-[11px] px-2 py-0.5 rounded bg-sapphire-800 text-gold-100">Level 7 (81%)</span>
+                  </div>
+                  <select id="subj-5-name" onchange="calculateAPS()" class="w-full px-2.5 py-2 rounded-lg border border-slate-300 text-xs font-medium bg-[#FFFFFF] focus:outline-none focus:ring-2 focus:ring-sapphire-800"></select>
+                  <div class="flex items-center gap-2">
+                    <input type="range" id="subj-5-slider" min="0" max="100" value="81" oninput="syncSubjInput(5, this.value)" class="w-full accent-sapphire-800" />
+                    <input type="number" id="subj-5" min="0" max="100" value="81" oninput="syncSubjInput(5, this.value)" class="w-16 px-2 py-1 rounded border border-slate-300 text-xs font-mono text-center bg-[#FFFFFF]" />
+                  </div>
+                </div>
+
+                <!-- Subject 7: Elective 3 -->
+                <div class="p-4 rounded-xl bg-[#F4F7FC] border border-sapphire-100 space-y-2">
+                  <div class="flex justify-between items-center text-xs font-bold text-sapphire-900">
+                    <span>7. Elective Subject 3</span>
+                    <span id="subj-6-badge" class="font-mono text-[11px] px-2 py-0.5 rounded bg-sapphire-800 text-gold-100">Level 6 (70%)</span>
+                  </div>
+                  <select id="subj-6-name" onchange="calculateAPS()" class="w-full px-2.5 py-2 rounded-lg border border-slate-300 text-xs font-medium bg-[#FFFFFF] focus:outline-none focus:ring-2 focus:ring-sapphire-800"></select>
+                  <div class="flex items-center gap-2">
+                    <input type="range" id="subj-6-slider" min="0" max="100" value="70" oninput="syncSubjInput(6, this.value)" class="w-full accent-sapphire-800" />
+                    <input type="number" id="subj-6" min="0" max="100" value="70" oninput="syncSubjInput(6, this.value)" class="w-16 px-2 py-1 rounded border border-slate-300 text-xs font-mono text-center bg-[#FFFFFF]" />
+                  </div>
+                </div>
+
+                <!-- Subject 8: Optional 8th Subject Over-Credit -->
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                  <div class="flex justify-between items-center text-xs font-bold text-slate-700">
+                    <label class="inline-flex items-center gap-1.5 cursor-pointer">
+                      <input type="checkbox" id="subj-7-enabled" onchange="calculateAPS()" class="rounded border-slate-300 text-sapphire-800 focus:ring-sapphire-800" />
+                      <span>8. Optional 8th Subject</span>
+                    </label>
+                    <span id="subj-7-badge" class="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-200 text-slate-700">Inactive</span>
+                  </div>
+                  <select id="subj-7-name" onchange="calculateAPS()" class="w-full px-2.5 py-2 rounded-lg border border-slate-300 text-xs font-medium bg-[#FFFFFF] focus:outline-none focus:ring-2 focus:ring-sapphire-800"></select>
+                  <div class="flex items-center gap-2">
+                    <input type="range" id="subj-7-slider" min="0" max="100" value="65" oninput="syncSubjInput(7, this.value)" class="w-full accent-sapphire-800" />
+                    <input type="number" id="subj-7" min="0" max="100" value="65" oninput="syncSubjInput(7, this.value)" class="w-16 px-2 py-1 rounded border border-slate-300 text-xs font-mono text-center bg-[#FFFFFF]" />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-[11px] text-slate-600 leading-relaxed">
+              <strong>Standard NSC Achievement Scale:</strong> Level 7 (80-100% = 7 pts) &bull; Level 6 (70-79% = 6 pts) &bull; Level 5 (60-69% = 5 pts) &bull; Level 4 (50-59% = 4 pts) &bull; Level 3 (40-49% = 3 pts) &bull; Level 2 (30-39% = 2 pts) &bull; Level 1 (0-29% = 1 pt). If an 8th subject is enabled, the calculator automatically uses your top 6 qualifying subjects (excluding Life Orientation).
+            </div>
+          </div>
+
+          <!-- Right 5 Cols: Live Synchronised APS Score, Statutory Pass Tier & Matched Stream Card -->
+          <div class="lg:col-span-5 bg-sapphire-900 text-white rounded-2xl p-6 sm:p-7 border-2 border-gold-400/60 shadow-xl space-y-5 sticky top-24">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono uppercase tracking-wider text-gold-400 font-bold">Live NSC Readiness &amp; Stream Match</span>
+              <span class="text-[11px] font-mono bg-sapphire-800 border border-gold-400/30 px-2.5 py-0.5 rounded text-gold-100">Best 6 Subjects</span>
+            </div>
+
+            <!-- Total APS Score & Statutory Pass Tier Banner -->
+            <div class="p-5 rounded-xl bg-sapphire-950 border border-gold-400/40 text-center space-y-2">
+              <div class="text-xs font-mono uppercase text-slate-300">Total 6-Subject APS Score</div>
+              <div id="aps-total-score" class="text-4xl sm:text-5xl font-extrabold font-mono text-gold-400">
+                37 / 42
+              </div>
+              <div id="aps-average-pct" class="text-xs font-mono text-slate-300">
+                Average Qualifying Subject Mark: 73.8%
+              </div>
+              <div class="pt-2">
+                <span id="aps-pass-tier-badge" class="inline-block px-3 py-1 rounded-full text-xs font-mono font-bold bg-gold-cta text-sapphire-950">
+                  Tier 1: Bachelor's Degree Pass (Competitive)
+                </span>
+              </div>
+              <p id="aps-statutory-note" class="text-[11px] text-slate-300 pt-1">
+                Meets statutory DBE Bachelor's pass rules (Home Language &ge; 40% and at least four 20-credit subjects &ge; 50%).
+              </p>
+            </div>
+
+            <!-- Embedded Primary Matched Stream Card Inside Calculator -->
+            <div class="p-4 rounded-xl bg-[#FFFFFF] text-slate-800 border-2 border-gold-400 shadow-md space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="px-2.5 py-0.5 rounded bg-gold-100 text-gold-800 font-mono text-[10px] font-bold uppercase">
+                  ★ #1 Primary Stream Match
+                </span>
+                <span id="calc-matched-stream-code" class="font-mono text-[11px] font-bold text-sapphire-800">
+                  Stream 01 &bull; APS 32-42
+                </span>
+              </div>
+              <h4 id="calc-matched-stream-title" class="text-base font-extrabold text-sapphire-900">
+                Stream 01: Health &amp; Biomedical Sciences Mentorship Stream
+              </h4>
+              <p id="calc-matched-stream-desc" class="text-xs text-slate-600 leading-relaxed">
+                Your combination of Mathematics, Physical Sciences, and Life Sciences with an APS of 37 qualifies you for our Health &amp; Biomedical Sciences Mentorship Stream.
+              </p>
+              <div id="calc-matched-stream-pathways" class="text-[11px] font-mono text-sapphire-800 bg-sapphire-50 p-2 rounded-lg border border-sapphire-100">
+                Target Pathways: BSc Biomedical Sciences, Medicine (MBChB), Pharmacy, Nursing, Allied Health
+              </div>
+              <div class="pt-1 flex flex-wrap gap-2">
+                <button type="button" id="calc-register-stream-btn" onclick="selectStreamForRegistration('Stream 01: Health & Biomedical Sciences Stream')" class="w-full py-2.5 px-3 rounded-lg bg-sapphire-800 hover:bg-sapphire-700 text-white font-bold text-xs transition flex items-center justify-center gap-1.5">
+                  <span>Register With This Matched Stream</span>
+                  <span>&rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Secondary Eligible Streams Pill List -->
+            <div class="space-y-1.5">
+              <div class="text-[11px] font-mono uppercase text-gold-100 font-bold">
+                Other Eligible Mentorship Streams for Your Subjects:
+              </div>
+              <div id="calc-secondary-streams" class="flex flex-wrap gap-1.5"></div>
+            </div>
+
+            <!-- Mentorship Preparation Advice -->
+            <div class="space-y-1.5">
+              <div class="text-[11px] font-mono uppercase text-gold-100 font-bold">Mentor Academic Strategy:</div>
+              <div id="aps-advice-box" class="p-3.5 rounded-xl bg-sapphire-800/80 border border-white/15 text-xs text-slate-200 leading-relaxed"></div>
+            </div>
+
+            <div class="pt-1">
+              <a href="#mentorship-tracks" class="w-full py-2.5 px-4 rounded-xl bg-gold-cta text-sapphire-950 font-bold text-xs flex items-center justify-center gap-2 shadow-md">
+                <span>Inspect All 8 Embedded Streams Below</span>
+                <span>&darr;</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. 8 EMBEDDED MENTORSHIP STREAMS DIRECTORY (SYNCHRONISED WITH CALCULATOR) -->
+  <section id="mentorship-tracks" class="py-20 bg-[#FFFFFF] border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sapphire-800/10 border border-sapphire-800/20 text-sapphire-800 text-xs font-bold uppercase tracking-wider">
+            Synchronised 8-Stream Mentorship Directory
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-sapphire-900 mt-3 tracking-tight">
+            Embedded Mentorship Streams Matched to Your APS Tier &amp; Matric Subjects
+          </h2>
+          <p class="text-slate-600 mt-3 text-base leading-relaxed">
+            Every card below updates live based on the Matric subjects and percentages entered in the APS calculator above. Learners are paired with trained university first-year mentors studying in the exact stream that matches their statutory pass tier and subject combination.
+          </p>
+        </div>
+
+        <!-- Stream Filter Controls -->
+        <div class="flex flex-wrap gap-1.5 bg-[#F4F7FC] p-1.5 rounded-xl border border-slate-200 shrink-0">
+          <button type="button" onclick="filterStreams('all')" id="stream-filter-all" class="px-3 py-2 rounded-lg text-xs font-bold bg-sapphire-800 text-white shadow-sm transition">
+            All 8 Streams
+          </button>
+          <button type="button" onclick="filterStreams('matched')" id="stream-filter-matched" class="px-3 py-2 rounded-lg text-xs font-bold text-sapphire-800 hover:bg-white transition">
+            Matched to My Subjects &amp; APS
+          </button>
+          <button type="button" onclick="filterStreams('bachelor')" id="stream-filter-bachelor" class="px-3 py-2 rounded-lg text-xs font-bold text-sapphire-800 hover:bg-white transition">
+            Bachelor's Tier
+          </button>
+          <button type="button" onclick="filterStreams('diploma')" id="stream-filter-diploma" class="px-3 py-2 rounded-lg text-xs font-bold text-sapphire-800 hover:bg-white transition">
+            Diploma &amp; TVET Tier
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Synchronisation Status Bar -->
+      <div class="mt-6 p-4 rounded-xl bg-sapphire-50 border border-sapphire-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-gold-500"></span>
+          <span class="font-bold text-sapphire-900">Active Learner Profile:</span>
+          <span id="directory-sync-summary" class="font-mono text-sapphire-800">
+            APS 37/42 &bull; Tier 1 Bachelor's Pass &bull; Primary Match: Stream 01 (Health &amp; Biomedical Sciences)
+          </span>
+        </div>
+        <a href="#aps-tool" onclick="switchToolTab('aps')" class="text-sapphire-800 hover:text-gold-700 font-bold underline">
+          Adjust Subjects in Calculator &uarr;
+        </a>
+      </div>
+
+      <!-- Dynamic 8-Stream Grid Container -->
+      <div id="streams-grid-container" class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-7">
+        <!-- Populated dynamically by renderMentorshipStreams() in JavaScript -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. INSTITUTIONAL LEADERSHIP & GOVERNANCE -->
+  <section id="governance" class="py-20 bg-[#F4F7FC]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-gold-50 border border-gold-200 text-gold-800 text-xs font-bold uppercase tracking-wider">
+          Institutional Leadership &amp; Governance
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-sapphire-900 mt-3 tracking-tight">
+          Led by University Mentorship Experience &amp; Classroom Educators
+        </h2>
+        <p class="text-slate-600 mt-3 text-base leading-relaxed">
+          Sesing Foundation NPC (CIPC Reg. No. 2026/535520/08) is governed as a registered Non-Profit Company under the South African Companies Act 71 of 2008, combining higher education mentorship experience with decades of Free State classroom leadership.
+        </p>
+      </div>
+
+      <!-- Board of Directors Cards -->
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Director 1: Tebogo Frederick Sesing -->
+        <div class="rounded-2xl border-2 border-gold-400/70 bg-[#FFFFFF] p-7 flex flex-col justify-between shadow-sm">
+          <div>
+            <div class="flex items-center justify-between gap-4 pb-4 border-b border-slate-100">
+              <div>
+                <span class="text-xs font-mono font-bold uppercase text-sapphire-800">Founder &amp; Executive Director</span>
+                <h3 class="text-xl font-extrabold text-sapphire-900 mt-0.5">Tebogo Frederick Sesing</h3>
+              </div>
+              <div class="w-12 h-12 rounded-xl bg-sapphire-900 text-gold-400 font-brand font-extrabold text-sm flex items-center justify-center shrink-0 border border-gold-400/40">
+                TFS
+              </div>
+            </div>
+            <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              An alumnus of <strong>Tawana Primary School</strong> and <strong>Moroka Senior Secondary School</strong> in Thaba Nchu with an academic background in <strong>Biomedical Sciences</strong> and higher education studies across the <strong>University of the Witwatersrand (Wits)</strong> and <strong>UNISA</strong>. Having experienced firsthand the leap from a Thaba Nchu high school classroom to a competitive university faculty, he founded Sesing Foundation NPC to extend university first-year mentorship directly to high school learners.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-mono text-slate-500">
+            <span>Pathway: Biomedical Sciences (Wits &amp; UNISA)</span>
+            <span class="text-sapphire-800 font-bold">Thaba Nchu Alumnus</span>
+          </div>
+        </div>
+
+        <!-- Director 2: Dimakatso Christinah Sesing -->
+        <div class="rounded-2xl border border-slate-200 bg-[#FFFFFF] p-7 flex flex-col justify-between shadow-sm">
+          <div>
+            <div class="flex items-center justify-between gap-4 pb-4 border-b border-slate-100">
+              <div>
+                <span class="text-xs font-mono font-bold uppercase text-gold-700">Co-Director &amp; Educator</span>
+                <h3 class="text-xl font-extrabold text-sapphire-900 mt-0.5">Dimakatso Christinah Sesing</h3>
+              </div>
+              <div class="w-12 h-12 rounded-xl bg-gold-50 text-gold-800 font-brand font-extrabold text-sm flex items-center justify-center shrink-0 border border-gold-300">
+                DCS
+              </div>
+            </div>
+            <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              A seasoned educator in the <strong>Free State Department of Education</strong> based in Thaba Nchu. She provides institutional governance, school principal liaison, learner safeguarding oversight, and curriculum alignment, ensuring that every high school mentorship workshop complements the official school academic calendar and supports educators in the classroom.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-mono text-slate-500">
+            <span>Role: Free State Department of Education Educator</span>
+            <span class="text-gold-800 font-bold">Academic Oversight</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Statutory Governance Summary Bar -->
+      <div class="mt-8 bg-[#FFFFFF] rounded-2xl border border-slate-200 p-6 shadow-sm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs">
+        <div>
+          <div class="font-mono uppercase text-slate-400">Registered Entity</div>
+          <div class="font-bold text-sapphire-900 text-sm mt-0.5">Sesing Foundation NPC</div>
+          <div class="text-slate-500 mt-0.5">Non-Profit Company (South Africa)</div>
+        </div>
+        <div>
+          <div class="font-mono uppercase text-slate-400">CIPC Registration No.</div>
+          <div class="font-mono font-bold text-sapphire-800 text-sm mt-0.5">2026/535520/08</div>
+          <div class="text-slate-500 mt-0.5">Companies Act 71 of 2008</div>
+        </div>
+        <div>
+          <div class="font-mono uppercase text-slate-400">Operational Base</div>
+          <div class="font-bold text-sapphire-900 text-sm mt-0.5">Thaba Nchu, Free State</div>
+          <div class="text-slate-500 mt-0.5">Mangaung Metropolitan Municipality</div>
+        </div>
+        <div>
+          <div class="font-mono uppercase text-slate-400">Learner Data Protection</div>
+          <div class="font-bold text-gold-700 text-sm mt-0.5">POPIA Section 18 Compliant</div>
+          <button onclick="openPopiaModal()" class="text-sapphire-800 underline font-semibold mt-0.5">Read Privacy Safeguards &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Dual-Entity Governance & Technology Attribution Card -->
+      <div class="mt-6 bg-sapphire-900 text-white rounded-2xl border border-gold-400/40 p-6 sm:p-7 shadow-md flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <div class="space-y-1.5 max-w-3xl">
+          <div class="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-gold-400 font-bold">
+            <span>Statutory Dual-Entity Governance Disclosure</span>
+          </div>
+          <h4 class="text-base sm:text-lg font-extrabold text-white">
+            Sesing Foundation NPC &amp; Sesing Digital School Systems (Pty) Ltd
+          </h4>
+          <p class="text-xs text-slate-200 leading-relaxed">
+            <strong>Sesing Foundation NPC (Reg. No. 2026/535520/08)</strong> operates strictly as a registered South African Non-Profit Company under the Companies Act 71 of 2008, delivering public-benefit high school-to-university mentorship and community education outreach. All digital portal infrastructure, learner readiness calculators, and institutional software architectures are developed and maintained by our technology partner, <strong>Sesing Digital School Systems (Pty) Ltd</strong>.
+          </p>
+        </div>
+        <div class="shrink-0">
+          <button onclick="openPopiaModal()" class="px-4 py-2.5 rounded-xl bg-gold-cta text-sapphire-950 font-bold text-xs shadow-sm transition">
+            Inspect Statutory Notice
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8. INTERACTIVE OUTREACH & MENTOR REGISTRATION FORM -->
+  <section id="partner" class="py-20 bg-[#FFFFFF] border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Left 5 Cols: Official Directory & Pure White Logo Card -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sapphire-800/10 border border-sapphire-800/20 text-sapphire-800 text-xs font-bold uppercase tracking-wider">
+            Get Involved
+          </div>
+          <h2 class="text-3xl font-extrabold text-sapphire-900 tracking-tight">
+            Bring University Mentors to Your High School or Join Our Mentor Network
+          </h2>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Whether you are a high school principal or Life Orientation educator requesting a transition workshop for your Grade 11 and 12 learners, or a trained university first-year mentor ready to guide learners from your home community, connect with our team below.
+          </p>
+
+          <div class="space-y-4 pt-2">
+            <!-- Pure White Card with Live GitHub Logo -->
+            <div class="p-4 rounded-xl bg-[#FFFFFF] border-2 border-gold-400/60 shadow-sm flex items-center gap-4">
+              <div class="bg-[#FFFFFF] p-1.5 rounded-lg border border-slate-200 shrink-0 flex items-center justify-center">
+                <img 
+                  src="https://raw.githubusercontent.com/Sesing-Foundation/Sesing-Foundation.main-website/main/Sesing%20Foundation%20Logo.jpeg" 
+                  alt="Sesing Foundation NPC Logo" 
+                  class="w-16 h-16 object-contain bg-[#FFFFFF]"
+                  onerror="handleLogoError(this)"
+                />
+              </div>
+              <div>
+                <div class="text-xs font-mono uppercase text-slate-400">Official Non-Profit Entity</div>
+                <div class="text-sm font-bold text-sapphire-900 mt-0.5">Sesing Foundation NPC</div>
+                <div class="text-xs text-gold-700 font-mono font-semibold mt-0.5">CIPC Reg: 2026/535520/08</div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#F4F7FC] border border-sapphire-100">
+              <div class="text-xs font-mono uppercase text-sapphire-800 font-bold">For High Schools &amp; Educators</div>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                We coordinate structured Grade 11 and Grade 12 mentorship sessions covering APS calculation, faculty selection, online university and NSFAS applications, and matric exam preparation.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#F4F7FC] border border-sapphire-100">
+              <div class="text-xs font-mono uppercase text-gold-800 font-bold">For University First-Year Mentors</div>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                If you currently serve (or have served) as a First-Year Mentor, residence mentor, or faculty peer advisor at a South African university, apply to extend your mentorship to high school learners.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 7 Cols: Interactive Dual-Mode Registration Form -->
+        <div class="lg:col-span-7">
+          <div class="bg-[#F4F7FC] rounded-2xl border-2 border-gold-400/60 p-7 sm:p-9 shadow-sm">
+            
+            <!-- Mode Selector Toggle -->
+            <div class="grid grid-cols-2 gap-2 bg-[#FFFFFF] p-1.5 rounded-xl border border-slate-200 mb-6">
+              <button type="button" onclick="selectFormType('school')" id="form-tab-school" class="py-2.5 px-3 rounded-lg text-xs font-bold bg-sapphire-800 text-white shadow-sm transition">
+                High School Workshop Request
+              </button>
+              <button type="button" onclick="selectFormType('mentor')" id="form-tab-mentor" class="py-2.5 px-3 rounded-lg text-xs font-bold text-sapphire-800 hover:bg-sapphire-50 transition">
+                University Mentor Application
+              </button>
+            </div>
+
+            <h3 id="form-heading" class="text-xl font-bold text-sapphire-900">
+              Request a High School Mentorship Workshop
+            </h3>
+            <p id="form-subheading" class="text-xs text-slate-600 mt-1">
+              For High School Principals, Deputy Principals, Life Orientation Educators, and School Governing Bodies.
+            </p>
+
+            <form id="outreach-form" onsubmit="handleOutreachSubmit(event)" class="mt-6 space-y-4">
+              <input type="hidden" id="form-mode-input" value="High School Workshop Request" />
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name *</label>
+                  <input type="text" id="form-name" required placeholder="Your full name" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 bg-[#FFFFFF] text-sm focus:outline-none focus:ring-2 focus:ring-sapphire-800" />
+                </div>
+                <div>
+                  <label id="label-org" class="block text-xs font-semibold text-slate-700 mb-1">High School Name &amp; Town *</label>
+                  <input type="text" id="form-org" required placeholder="e.g. Moroka Senior Secondary, Thaba Nchu" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 bg-[#FFFFFF] text-sm focus:outline-none focus:ring-2 focus:ring-sapphire-800" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Email Address or Phone Number *</label>
+                  <input type="text" id="form-contact" required placeholder="name@example.co.za or 082 000 0000" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 bg-[#FFFFFF] text-sm focus:outline-none focus:ring-2 focus:ring-sapphire-800" />
+                </div>
+                <div>
+                  <label id="label-focus" class="block text-xs font-semibold text-slate-700 mb-1">Matched Mentorship Stream or Workshop Focus *</label>
+                  <select id="form-focus" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm bg-[#FFFFFF] focus:outline-none focus:ring-2 focus:ring-sapphire-800">
+                    <option value="Stream 01: Health & Biomedical Sciences Stream">Stream 01: Health &amp; Biomedical Sciences Stream</option>
+                    <option value="Stream 02: Engineering, Built Environment & Technical Stream">Stream 02: Engineering, Built Environment &amp; Technical Stream</option>
+                    <option value="Stream 03: Natural, Agricultural & Computer Sciences (STEM & ICT) Stream">Stream 03: Natural, Agricultural &amp; Computer Sciences (STEM &amp; ICT) Stream</option>
+                    <option value="Stream 04: Chartered Accountancy, Actuarial & Quantitative Finance Stream">Stream 04: Chartered Accountancy, Actuarial &amp; Quantitative Finance Stream</option>
+                    <option value="Stream 05: Commerce, Business Management & Public Administration Stream">Stream 05: Commerce, Business Management &amp; Public Administration Stream</option>
+                    <option value="Stream 06: Law, Humanities, Social Sciences & Governance Stream">Stream 06: Law, Humanities, Social Sciences &amp; Governance Stream</option>
+                    <option value="Stream 07: Initial Teacher Education & Academic Pedagogy Stream (BEd)">Stream 07: Initial Teacher Education &amp; Academic Pedagogy Stream (BEd)</option>
+                    <option value="Stream 08: Hospitality, Tourism, Creative Arts & Services Articulation Stream">Stream 08: Hospitality, Tourism, Creative Arts &amp; Services Articulation Stream</option>
+                    <option value="All-Stream Grade 11/12 School Workshop (APS, Applications & Study Skills)">All-Stream Grade 11/12 School Workshop (APS, Applications &amp; Study Skills)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label id="label-notes" class="block text-xs font-semibold text-slate-700 mb-1">Additional Details (Grade Group Size, Preferred Dates, or Faculty Stream)</label>
+                <textarea id="form-notes" rows="3" placeholder="Share details about your learners, preferred dates, or university mentorship background..." class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 bg-[#FFFFFF] text-sm focus:outline-none focus:ring-2 focus:ring-sapphire-800"></textarea>
+              </div>
+
+              <div class="flex items-start gap-2.5 pt-1">
+                <input type="checkbox" id="form-popia" required class="mt-1 rounded border-slate-300 text-sapphire-800 focus:ring-sapphire-800" />
+                <label for="form-popia" class="text-xs text-slate-600 leading-relaxed">
+                  I consent to my information being processed by Sesing Foundation NPC in accordance with <button type="button" onclick="openPopiaModal()" class="text-sapphire-800 font-semibold underline">Section 18 of the Protection of Personal Information Act (POPIA)</button> for coordinating mentorship programmes.
+                </label>
+              </div>
+
+              <button type="submit" id="form-submit-btn" class="w-full py-3.5 px-6 rounded-xl bg-sapphire-800 hover:bg-sapphire-700 text-white font-bold text-sm shadow-md border border-gold-400/40 transition flex items-center justify-center gap-2">
+                <span>Submit High School Workshop Request</span>
+                <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </button>
+            </form>
+
+            <!-- Non-Alert Confirmation Banner -->
+            <div id="form-success-box" class="hidden mt-4 p-4 rounded-xl bg-[#FFFFFF] border-2 border-sapphire-800 text-sapphire-900 text-xs space-y-1">
+              <div class="font-bold text-sm flex items-center gap-2">
+                <span>✓ Registration Recorded</span>
+                <span id="form-ref-code" class="font-mono text-[11px] bg-gold-200 text-sapphire-950 px-2 py-0.5 rounded font-bold">SF-2026</span>
+              </div>
+              <p id="form-success-text" class="text-slate-700"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. FOOTER WITH PURE WHITE LOGO BADGE & SUBTLE DIGITAL ATTRIBUTION -->
+  <footer class="bg-sapphire-950 text-slate-400 border-t-2 border-gold-500/40 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-slate-800/80">
+        
+        <div class="md:col-span-5 space-y-3">
+          <div class="flex items-center gap-3.5">
+            <!-- Pure White Container for Exact GitHub Logo -->
+            <div class="bg-[#FFFFFF] rounded-xl p-2 shadow-sm border-2 border-gold-400 inline-flex items-center justify-center shrink-0">
+              <img 
+                src="https://raw.githubusercontent.com/Sesing-Foundation/Sesing-Foundation.main-website/main/Sesing%20Foundation%20Logo.jpeg" 
+                alt="Sesing Foundation NPC Logo" 
+                class="h-14 w-auto object-contain bg-[#FFFFFF]"
+                onerror="handleLogoError(this)"
+              />
+            </div>
+            <div>
+              <div class="font-brand font-extrabold text-base tracking-wider text-gold-metallic">SESING</div>
+              <div class="font-brand font-bold text-[11px] tracking-[0.2em] text-white">FOUNDATION NPC</div>
+              <div class="font-mono text-[11px] text-gold-400 mt-0.5">CIPC Reg: 2026/535520/08</div>
+            </div>
+          </div>
+          <p class="text-slate-300 leading-relaxed max-w-sm">
+            A registered South African Non-Profit Company extending existing university first-year mentorship programmes into high schools so learners transition successfully from matric to university.
+          </p>
+        </div>
+
+        <div class="md:col-span-4 space-y-2">
+          <div class="font-bold text-gold-100 uppercase tracking-wider">Mentorship Continuum</div>
+          <ul class="space-y-1.5 text-slate-300">
+            <li><a href="#our-model" class="hover:text-gold-400 transition">Extended First-Year Mentorship Model</a></li>
+            <li><a href="#transition-roadmap" onclick="switchToolTab('roadmap')" class="hover:text-gold-400 transition">4-Stage Matric-to-University Roadmap</a></li>
+            <li><a href="#aps-tool" onclick="switchToolTab('aps')" class="hover:text-gold-400 transition">National Senior Certificate APS Calculator</a></li>
+            <li><a href="#mentorship-tracks" class="hover:text-gold-400 transition">Faculty-Matched Mentorship Streams</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-3 space-y-2">
+          <div class="font-bold text-gold-100 uppercase tracking-wider">Institutional Directory</div>
+          <p class="text-slate-300">
+            <strong class="text-white">Registered Entity:</strong><br/>
+            Sesing Foundation NPC (2026/535520/08)
+          </p>
+          <p class="text-slate-300 pt-1">
+            <strong class="text-white">Headquarters:</strong><br/>
+            Thaba Nchu, Mangaung, Free State
+          </p>
+          <p class="text-slate-400 pt-1 text-[11px]">
+            Digital portal infrastructure supported by <span class="text-slate-300 font-medium">Sesing Digital School Systems (Pty) Ltd</span>.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400">
+        <div>
+          &copy; 2026 Sesing Foundation NPC (CIPC Reg. No. 2026/535520/08). All rights reserved.
+        </div>
+        <div class="flex items-center gap-4">
+          <button onclick="openPopiaModal()" class="text-gold-400 hover:text-gold-100 underline">POPIA Privacy Notice</button>
+          <span>&bull;</span>
+          <a href="#governance" class="hover:text-white">Leadership &amp; Governance</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 10. POPIA SECTION 18 PRIVACY NOTICE MODAL -->
+  <div id="popia-modal" class="fixed inset-0 z-50 hidden bg-sapphire-950/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#FFFFFF] rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border-2 border-gold-400 overflow-hidden">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 bg-sapphire-900 text-white flex items-center justify-between border-b border-gold-400/30">
+        <div class="flex items-center gap-3">
+          <div class="bg-[#FFFFFF] rounded-lg p-1 border border-gold-400 flex items-center justify-center shrink-0">
+            <img 
+              src="https://raw.githubusercontent.com/Sesing-Foundation/Sesing-Foundation.main-website/main/Sesing%20Foundation%20Logo.jpeg" 
+              alt="Sesing Foundation NPC Logo" 
+              class="w-10 h-10 object-contain bg-[#FFFFFF]"
+              onerror="handleLogoError(this)"
+            />
+          </div>
+          <div>
+            <span class="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-gold-cta text-sapphire-950">Statutory Data Protection Notice</span>
+            <h3 class="text-base sm:text-lg font-bold mt-1">POPIA Section 18 Learner &amp; Mentor Privacy Notice</h3>
+          </div>
+        </div>
+        <button onclick="closePopiaModal()" class="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/10" aria-label="Close Modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Modal Scrollable Content -->
+      <div class="p-6 overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed">
+        <div class="p-3.5 rounded-xl bg-sapphire-50 border border-sapphire-200 font-mono text-[11px] text-sapphire-900">
+          <strong>Responsible Party:</strong> Sesing Foundation NPC (CIPC Reg. No. 2026/535520/08)<br/>
+          <strong>Operational Base:</strong> Thaba Nchu, Free State, Republic of South Africa<br/>
+          <strong>Governing Statute:</strong> Protection of Personal Information Act 4 of 2013 (POPIA)
+        </div>
+
+        <div>
+          <h4 class="font-bold text-sapphire-900 text-sm">1. Purpose of Information Processing (POPIA Section 18)</h4>
+          <p class="mt-1">
+            Sesing Foundation NPC collects educator, school, university mentor, and learner workshop inquiry details strictly for coordinating high school-to-university mentorship sessions, faculty matching, and academic transition guidance.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-sapphire-900 text-sm">2. Safeguarding High School Learners (POPIA Sections 34 &amp; 35)</h4>
+          <p class="mt-1">
+            All school mentorship workshops are conducted in partnership with school leadership and educators. Where learners are under the age of 18, participation in ongoing individual mentorship requires school and parent/guardian consent in full compliance with Sections 34 and 35 of POPIA. The NSC APS Calculator on this website runs entirely inside your browser and does not store or transmit learner marks.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-sapphire-900 text-sm">3. University Mentor Vetting &amp; Code of Conduct</h4>
+          <p class="mt-1">
+            University student mentors participating in high school outreach must adhere to the Sesing Foundation NPC Learner Safeguarding Code of Conduct and POPIA confidentiality standards.
+          </p>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <button onclick="copyPopiaClause()" class="px-4 py-2 rounded-lg border border-sapphire-300 bg-[#FFFFFF] hover:bg-sapphire-50 text-xs font-semibold text-sapphire-900 transition">
+          Copy Section 18 Summary
+        </button>
+        <button onclick="closePopiaModal()" class="px-5 py-2 rounded-lg bg-sapphire-800 hover:bg-sapphire-700 text-white text-xs font-semibold transition">
+          Close Notice
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NON-INTRUSIVE TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 hidden px-4 py-3 rounded-xl bg-sapphire-950 text-white text-xs font-medium shadow-xl border border-gold-400 flex items-center gap-2.5">
+    <span class="w-2 h-2 rounded-full bg-gold-400"></span>
+    <span id="toast-message">Copied to clipboard</span>
+  </div>
+
+  <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+  <script>
+    // Toast Notification Helper
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.textContent = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3200);
+    }
+
+    // Copy CIPC Registration Number
+    function copyCipc() {
+      const tempInput = document.createElement('textarea');
+      tempInput.value = '2026/535520/08';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast('CIPC Reg. No. 2026/535520/08 copied to clipboard');
+    }
+
+    // Copy POPIA Clause Summary
+    function copyPopiaClause() {
+      const clause = "Sesing Foundation NPC (Reg. No. 2026/535520/08) | POPIA Sec 18 & 35 Compliant: All school and university mentor records are processed strictly for high school-to-university mentorship coordination with full minor learner privacy safeguards.";
+      const tempInput = document.createElement('textarea');
+      tempInput.value = clause;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast('POPIA Section 18 Summary copied');
+    }
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Hero Brand Card Tabs
+    function switchBriefTab(tabName) {
+      const tabs = ['innovation', 'roots', 'status'];
+      tabs.forEach(t => {
+        const content = document.getElementById('brief-content-' + t);
+        const btn = document.getElementById('brief-tab-' + t);
+        if (t === tabName) {
+          content.classList.remove('hidden');
+          btn.className = 'py-2 px-2 rounded-lg bg-sapphire-800 text-white shadow-sm transition';
+        } else {
+          content.classList.add('hidden');
+          btn.className = 'py-2 px-2 rounded-lg text-sapphire-800 hover:bg-white transition';
+        }
+      });
+    }
+
+    // Switch Between Roadmap Tab & APS Calculator Tab
+    function switchToolTab(tab) {
+      const roadmapPanel = document.getElementById('tool-panel-roadmap');
+      const apsPanel = document.getElementById('tool-panel-aps');
+      const roadmapBtn = document.getElementById('tool-tab-roadmap');
+      const apsBtn = document.getElementById('tool-tab-aps');
+
+      if (tab === 'roadmap') {
+        roadmapPanel.classList.remove('hidden');
+        apsPanel.classList.add('hidden');
+        roadmapBtn.className = 'px-4 py-2.5 rounded-lg text-xs font-bold bg-sapphire-800 text-white shadow-sm transition';
+        apsBtn.className = 'px-4 py-2.5 rounded-lg text-xs font-bold text-sapphire-800 hover:bg-sapphire-50 transition';
+      } else {
+        roadmapPanel.classList.add('hidden');
+        apsPanel.classList.remove('hidden');
+        apsBtn.className = 'px-4 py-2.5 rounded-lg text-xs font-bold bg-sapphire-800 text-white shadow-sm transition';
+        roadmapBtn.className = 'px-4 py-2.5 rounded-lg text-xs font-bold text-sapphire-800 hover:bg-sapphire-50 transition';
+      }
+    }
+
+    // 4-Stage Transition Roadmap Data
+    const roadmapStages = {
+      1: {
+        badge: 'Stage 01 • Grade 11/12 Academic Alignment',
+        title: 'Aligning Grade 11 & 12 Subject Performance With University Admission Benchmarks',
+        description: 'Many high school learners only realise in Grade 12 that South African universities use final Grade 11 marks to grant initial conditional offers. Our extended university mentors engage Grade 11 and Grade 12 learners early so they understand how subject percentages translate into Admission Point Scores (APS).',
+        deliverables: [
+          'Understanding how Grade 11 final promotion results determine conditional university acceptance in early Grade 12.',
+          'Mapping subject combinations (such as Mathematics, Physical Sciences, Life Sciences, Geography, and Accounting) to specific university faculties.',
+          'Introducing university-style active recall, past-paper analysis, and time management habits before matric finals begin.'
+        ],
+        outcome: 'Every participating learner completes a Personal University Target Sheet listing three realistic degree or diploma pathways, the exact APS required for each, and a subject improvement plan.',
+        timing: 'Timing: Grade 11 & Early Grade 12'
+      },
+      2: {
+        badge: 'Stage 02 • University & NSFAS Application Triage',
+        title: 'Navigating University Applications, NBTs & Financial Aid On Time',
+        description: 'During the first half of Grade 12, learners must juggle school assessments while applying to universities, booking National Benchmark Tests (NBTs), and preparing NSFAS and bursary documentation. University mentors walk learners through every step.',
+        deliverables: [
+          'Selecting balanced university choices across competitive first-choice degrees and smart backup programmes.',
+          'Understanding early closing dates for Health Sciences, Biomedical Sciences, Engineering, and Residence placement.',
+          'Preparing certified supporting documents and avoiding common application mistakes on university portals and NSFAS.'
+        ],
+        outcome: 'Learners submit complete, accurate university and funding applications before institutional deadlines close, guided by mentors who recently completed the exact same process.',
+        timing: 'Timing: Grade 12 Terms 1 - 2 (March - August)'
+      },
+      3: {
+        badge: 'Stage 03 • Pre-Orientation Bridging',
+        title: 'Academic Literacy, Exam Mastery & Pre-University Readiness',
+        description: 'A conditional university offer only becomes final if the learner maintains or improves their APS in the National Senior Certificate (NSC) final examinations while building the academic literacy required for first-year lectures.',
+        deliverables: [
+          'Structuring a realistic Trial Exam to Final Exam revision timetable across all 6 core NSC subjects.',
+          'Mastering high-weight exam topics in Mathematics, Physical Sciences, Life Sciences, Accounting, and Languages.',
+          'Building university academic literacy skills including structured note-taking, scientific reading, and digital portal readiness.'
+        ],
+        outcome: 'Matriculants enter their final NSC examinations with structured past-paper practice, clear mark targets per subject, and pre-orientation readiness for university.',
+        timing: 'Timing: Grade 12 Terms 3 - 4 (August - November)'
+      },
+      4: {
+        badge: 'Stage 04 • First-Year Campus Integration',
+        title: 'Seamless Handover Into Campus First-Year Mentorship Programmes',
+        description: 'Once matric results are released in January, the transition from high school to a university lecture hall can be overwhelming. Our mentors bridge the gap between high school departure and campus orientation week.',
+        deliverables: [
+          'Guidance on accepting final offers, online faculty registration, module selection, and residence or accommodation check-in.',
+          'Connecting new first-year students directly with their campus First-Year Mentorship Programme and faculty peer advisors.',
+          'Preparing for first-semester university pacing, digital learning portals, laboratory safety, and academic support centres.'
+        ],
+        outcome: 'Matriculants arrive at university already connected to an established peer mentorship community on campus, dramatically reducing first-year dropout and academic isolation.',
+        timing: 'Timing: January - March (First-Year Intake)'
+      }
+    };
+
+    function selectRoadmapStage(stageNum) {
+      for (let i = 1; i <= 4; i++) {
+        const btn = document.getElementById('stage-btn-' + i);
+        if (i === stageNum) {
+          btn.className = 'text-left p-4 rounded-xl border-2 border-gold-500 bg-gold-50/70 shadow-sm transition';
+        } else {
+          btn.className = 'text-left p-4 rounded-xl border border-slate-200 bg-[#F4F7FC] hover:border-sapphire-800 transition';
+        }
+      }
+
+      const data = roadmapStages[stageNum];
+      document.getElementById('stage-badge').textContent = data.badge;
+      document.getElementById('stage-title').textContent = data.title;
+      document.getElementById('stage-description').textContent = data.description;
+      document.getElementById('stage-outcome').textContent = data.outcome;
+      document.getElementById('stage-timing').textContent = data.timing;
+
+      const listEl = document.getElementById('stage-deliverables');
+      listEl.innerHTML = data.deliverables.map(item => `
+        <li class="flex items-start gap-2">
+          <span class="text-gold-600 font-bold">&bull;</span>
+          <span>${item}</span>
+        </li>
+      `).join('');
+    }
+
+    // Complete Official DBE NSC Elective Subjects Grouped by Curriculum Category
+    const nscElectiveGroups = [
+      {
+        label: '1. Sciences & Computing',
+        subjects: [
+          'Physical Sciences',
+          'Life Sciences',
+          'Technical Sciences',
+          'Information Technology (IT)',
+          'Computer Applications Technology (CAT)',
+          'Marine Sciences'
+        ]
+      },
+      {
+        label: '2. Commerce & Management',
+        subjects: [
+          'Accounting',
+          'Business Studies',
+          'Economics'
+        ]
+      },
+      {
+        label: '3. Engineering & Technology',
+        subjects: [
+          'Engineering Graphics and Design (EGD)',
+          'Civil Technology (Construction / Woodworking / Civil Services)',
+          'Electrical Technology (Power Systems / Electronics / Digital Systems)',
+          'Mechanical Technology (Automotive / Fitting & Machining / Welding & Metalwork)'
+        ]
+      },
+      {
+        label: '4. Humanities & Social Studies',
+        subjects: [
+          'Geography',
+          'History',
+          'Religion Studies'
+        ]
+      },
+      {
+        label: '5. Agriculture',
+        subjects: [
+          'Agricultural Sciences',
+          'Agricultural Management Practices',
+          'Agricultural Technology'
+        ]
+      },
+      {
+        label: '6. Services & Consumer Studies',
+        subjects: [
+          'Tourism',
+          'Hospitality Studies',
+          'Consumer Studies'
+        ]
+      },
+      {
+        label: '7. Creative & Performing Arts',
+        subjects: [
+          'Visual Arts',
+          'Dramatic Arts',
+          'Music',
+          'Dance Studies',
+          'Design'
+        ]
+      },
+      {
+        label: '8. Second Additional & Non-Official Languages',
+        subjects: [
+          'Official SA Language (Second Additional Language Level)',
+          'French Second Additional Language',
+          'German Second Additional Language',
+          'Mandarin Second Additional Language',
+          'Portuguese Second Additional Language',
+          'Arabic Second Additional Language',
+          'Hebrew Second Additional Language',
+          'Italian Second Additional Language',
+          'Spanish Second Additional Language'
+        ]
+      }
+    ];
+
+    // 8 Embedded Mentorship Streams Definition (Synchronised with Calculator)
+    const embeddedStreamsData = [
+      {
+        id: 'stream-01',
+        code: 'Stream 01',
+        formValue: 'Stream 01: Health & Biomedical Sciences Stream',
+        title: 'Stream 01: Health & Biomedical Sciences Mentorship Stream',
+        tierCategory: 'bachelor',
+        tierLabel: "Bachelor's Pass (Competitive Tier 1)",
+        minAPS: 32,
+        maxAPS: 42,
+        requiresBachelor: true,
+        allowedMath: ['Mathematics'],
+        minMathPct: 60,
+        keySubjects: ['Life Sciences', 'Physical Sciences'],
+        requiredSubjectsText: 'Mathematics (60%+), Life Sciences, Physical Sciences, English HL/FAL',
+        pathways: 'BSc Biomedical Sciences, Medicine (MBChB), Pharmacy, Nursing, Physiotherapy, Radiography & Allied Health',
+        mentorSupport: 'Guided preparation for early Health Sciences closing dates, National Benchmark Tests (NBTs), and first-year anatomy, physiology, chemistry, and laboratory transitions.'
+      },
+      {
+        id: 'stream-02',
+        code: 'Stream 02',
+        formValue: 'Stream 02: Engineering, Built Environment & Technical Stream',
+        title: 'Stream 02: Engineering, Built Environment & Technical Stream',
+        tierCategory: 'both',
+        tierLabel: "Bachelor's / Diploma / TVET N-Diploma",
+        minAPS: 24,
+        maxAPS: 42,
+        requiresBachelor: false,
+        allowedMath: ['Mathematics', 'Technical Mathematics'],
+        minMathPct: 50,
+        keySubjects: [
+          'Physical Sciences',
+          'Technical Sciences',
+          'Engineering Graphics and Design (EGD)',
+          'Civil Technology (Construction / Woodworking / Civil Services)',
+          'Electrical Technology (Power Systems / Electronics / Digital Systems)',
+          'Mechanical Technology (Automotive / Fitting & Machining / Welding & Metalwork)'
+        ],
+        requiredSubjectsText: 'Mathematics or Technical Mathematics, Physical Sciences or Technical Sciences, EGD, Electrical/Civil/Mechanical Technology',
+        pathways: 'BSc/BEng Electrical, Civil, Mechanical & Mining Engineering, Construction Studies, and CUT / Motheo TVET Engineering Articulation',
+        mentorSupport: 'Demystifies first-year engineering calculus, applied physics, technical drawing portfolios, and university or University of Technology laboratory survival.'
+      },
+      {
+        id: 'stream-03',
+        code: 'Stream 03',
+        formValue: 'Stream 03: Natural, Agricultural & Computer Sciences (STEM & ICT) Stream',
+        title: 'Stream 03: Natural, Agricultural & Computer Sciences (STEM & ICT) Stream',
+        tierCategory: 'both',
+        tierLabel: "Bachelor's / Diploma Pass",
+        minAPS: 25,
+        maxAPS: 42,
+        requiresBachelor: false,
+        allowedMath: ['Mathematics', 'Technical Mathematics'],
+        minMathPct: 50,
+        keySubjects: [
+          'Physical Sciences',
+          'Life Sciences',
+          'Agricultural Sciences',
+          'Agricultural Management Practices',
+          'Agricultural Technology',
+          'Information Technology (IT)',
+          'Computer Applications Technology (CAT)',
+          'Geography',
+          'Marine Sciences'
+        ],
+        requiredSubjectsText: 'Mathematics, Physical Sciences, Life Sciences, Agricultural Sciences, Information Technology (IT), CAT, Geography',
+        pathways: 'BSc Computer Science, Information Technology, Data Science, BSc Agriculture, Agricultural Management & Environmental Sciences',
+        mentorSupport: 'Connects learners with mentors in STEM, Agriculture, and ICT to master programming foundations, scientific report writing, and practical fieldwork.'
+      },
+      {
+        id: 'stream-04',
+        code: 'Stream 04',
+        formValue: 'Stream 04: Chartered Accountancy, Actuarial & Quantitative Finance Stream',
+        title: 'Stream 04: Chartered Accountancy, Actuarial & Quantitative Finance Stream',
+        tierCategory: 'bachelor',
+        tierLabel: "Bachelor's Pass (Tier 1 & 2)",
+        minAPS: 30,
+        maxAPS: 42,
+        requiresBachelor: true,
+        allowedMath: ['Mathematics'],
+        minMathPct: 60,
+        keySubjects: ['Accounting', 'Economics', 'Business Studies'],
+        requiredSubjectsText: 'Mathematics (60%+), Accounting, Economics, Business Studies',
+        pathways: 'BCom Accounting Sciences (CA(SA) stream), BCom Financial Sciences, Economics, Investment Management & Actuarial Science',
+        mentorSupport: 'Prepares learners for high-volume quantitative tutorials, SAICA/bursary applications (such as Thuthuka), and first-year financial accounting standards.'
+      },
+      {
+        id: 'stream-05',
+        code: 'Stream 05',
+        formValue: 'Stream 05: Commerce, Business Management & Public Administration Stream',
+        title: 'Stream 05: Commerce, Business Management & Public Administration Stream',
+        tierCategory: 'both',
+        tierLabel: "Bachelor's / Diploma / Higher Certificate",
+        minAPS: 20,
+        maxAPS: 36,
+        requiresBachelor: false,
+        allowedMath: ['Mathematics', 'Technical Mathematics', 'Mathematical Literacy'],
+        minMathPct: 40,
+        keySubjects: ['Business Studies', 'Economics', 'Accounting', 'Computer Applications Technology (CAT)', 'Tourism'],
+        requiredSubjectsText: 'Mathematics or Mathematical Literacy, Business Studies, Economics, Accounting, CAT, Tourism',
+        pathways: 'BCom General, Marketing, Human Resource Management, Supply Chain, Public Management, Entrepreneurship & National Diplomas',
+        mentorSupport: 'Guides learners on bridging from Mathematical Literacy or Core Mathematics into university business statistics, academic case studies, and commercial law.'
+      },
+      {
+        id: 'stream-06',
+        code: 'Stream 06',
+        formValue: 'Stream 06: Law, Humanities, Social Sciences & Governance Stream',
+        title: 'Stream 06: Law, Humanities, Social Sciences & Governance Stream',
+        tierCategory: 'both',
+        tierLabel: "Bachelor's / Diploma Pass",
+        minAPS: 23,
+        maxAPS: 40,
+        requiresBachelor: false,
+        allowedMath: ['Mathematics', 'Technical Mathematics', 'Mathematical Literacy'],
+        minMathPct: 30,
+        keySubjects: ['History', 'Geography', 'Religion Studies', 'Dramatic Arts', 'Official SA Language (Second Additional Language Level)'],
+        requiredSubjectsText: 'Home Language (60%+ ideal), First Additional Language, History, Geography, Religion Studies, Dramatic Arts',
+        pathways: 'LLB Law, BA Law, BA Psychology, Bachelor of Social Work (BSW), Criminology, Political Science, International Relations & Journalism',
+        mentorSupport: 'Equips learners for heavy university reading loads, legal and philosophical argumentation, academic referencing, and faculty moot or writing centres.'
+      },
+      {
+        id: 'stream-07',
+        code: 'Stream 07',
+        formValue: 'Stream 07: Initial Teacher Education & Academic Pedagogy Stream (BEd)',
+        title: 'Stream 07: Initial Teacher Education & Academic Pedagogy Stream (BEd)',
+        tierCategory: 'bachelor',
+        tierLabel: "Bachelor's / Higher Certificate in Education",
+        minAPS: 23,
+        maxAPS: 36,
+        requiresBachelor: true,
+        allowedMath: ['Mathematics', 'Technical Mathematics', 'Mathematical Literacy'],
+        minMathPct: 40,
+        keySubjects: ['Life Sciences', 'Physical Sciences', 'History', 'Geography', 'Accounting', 'Business Studies', 'Technical Sciences'],
+        requiredSubjectsText: 'Official SA Languages, Mathematics / Mathematical Literacy / Technical Maths, and two teaching specialisation electives',
+        pathways: 'Bachelor of Education (BEd) in Foundation Phase, Intermediate Phase, or Senior & FET Phase Teaching (Funza Lushaka Bursary aligned)',
+        mentorSupport: 'Pairs aspiring educators with senior BEd mentors to align subject specialisations, apply for Funza Lushaka bursaries, and prepare for teaching practicals.'
+      },
+      {
+        id: 'stream-08',
+        code: 'Stream 08',
+        formValue: 'Stream 08: Hospitality, Tourism, Creative Arts & Services Articulation Stream',
+        title: 'Stream 08: Hospitality, Tourism, Creative Arts & Services Articulation Stream',
+        tierCategory: 'diploma',
+        tierLabel: 'Diploma / Higher Certificate / TVET Articulation',
+        minAPS: 16,
+        maxAPS: 30,
+        requiresBachelor: false,
+        allowedMath: ['Mathematics', 'Technical Mathematics', 'Mathematical Literacy'],
+        minMathPct: 30,
+        keySubjects: [
+          'Tourism',
+          'Hospitality Studies',
+          'Consumer Studies',
+          'Visual Arts',
+          'Design',
+          'Music',
+          'Dramatic Arts',
+          'Dance Studies',
+          'Agricultural Management Practices'
+        ],
+        requiredSubjectsText: 'Tourism, Hospitality Studies, Consumer Studies, Visual Arts, Design, Music, Dramatic Arts, Dance Studies',
+        pathways: 'National Diploma & BTech in Tourism Management, Hospitality & Culinary Studies, Consumer Sciences, Visual & Performing Arts, and TVET NATED Articulation',
+        mentorSupport: 'Supports learners applying to Universities of Technology (such as CUT), comprehensive universities, and TVET articulation pathways with portfolio and practical readiness.'
+      }
+    ];
+
+    let activeStreamFilter = 'all';
+    let latestEvaluatedStreams = [];
+
+    // Populate Elective Dropdowns (Subjects 5, 6, 7, 8)
+    function populateElectiveDropdowns() {
+      const defaults = {
+        4: 'Physical Sciences',
+        5: 'Life Sciences',
+        6: 'Geography',
+        7: 'Accounting'
+      };
+
+      [4, 5, 6, 7].forEach(idx => {
+        const selectEl = document.getElementById(`subj-${idx}-name`);
+        if (!selectEl) return;
+        selectEl.innerHTML = nscElectiveGroups.map(group => {
+          const optionsHtml = group.subjects.map(subj => {
+            const isSelected = defaults[idx] === subj ? 'selected' : '';
+            return `<option value="${subj}" ${isSelected}>${subj}</option>`;
+          }).join('');
+          return `<optgroup label="${group.label}">${optionsHtml}</optgroup>`;
+        }).join('');
+      });
+    }
+
+    // Sync Slider and Number Input
+    function syncSubjInput(idx, val) {
+      let cleanVal = parseInt(val, 10);
+      if (isNaN(cleanVal) || cleanVal < 0) cleanVal = 0;
+      if (cleanVal > 100) cleanVal = 100;
+
+      const numEl = document.getElementById(`subj-${idx}`);
+      const sliderEl = document.getElementById(`subj-${idx}-slider`);
+      if (numEl) numEl.value = cleanVal;
+      if (sliderEl) sliderEl.value = cleanVal;
+
+      calculateAPS();
+    }
+
+    // Quick Learner Profile Presets
+    function applyLearnerPreset(presetKey) {
+      const presets = {
+        biomed: {
+          s1Name: 'Setswana Home Language', s1: 72,
+          s2Name: 'English First Additional Language (FAL)', s2: 74,
+          s3Name: 'Mathematics', s3: 71,
+          lo: 78,
+          s4Name: 'Physical Sciences', s4: 75,
+          s5Name: 'Life Sciences', s5: 81,
+          s6Name: 'Geography', s6: 70,
+          s7Enabled: false, s7Name: 'Accounting', s7: 65
+        },
+        engineering: {
+          s1Name: 'Sesotho Home Language', s1: 68,
+          s2Name: 'English First Additional Language (FAL)', s2: 70,
+          s3Name: 'Technical Mathematics', s3: 72,
+          lo: 74,
+          s4Name: 'Technical Sciences', s4: 71,
+          s5Name: 'Engineering Graphics and Design (EGD)', s5: 76,
+          s6Name: 'Electrical Technology (Power Systems / Electronics / Digital Systems)', s6: 69,
+          s7Enabled: false, s7Name: 'Geography', s7: 60
+        },
+        accounting: {
+          s1Name: 'Setswana Home Language', s1: 70,
+          s2Name: 'English First Additional Language (FAL)', s2: 73,
+          s3Name: 'Mathematics', s3: 68,
+          lo: 76,
+          s4Name: 'Accounting', s4: 78,
+          s5Name: 'Economics', s5: 72,
+          s6Name: 'Business Studies', s6: 74,
+          s7Enabled: false, s7Name: 'Computer Applications Technology (CAT)', s7: 65
+        },
+        law: {
+          s1Name: 'Setswana Home Language', s1: 74,
+          s2Name: 'English First Additional Language (FAL)', s2: 71,
+          s3Name: 'Mathematical Literacy', s3: 64,
+          lo: 75,
+          s4Name: 'History', s4: 72,
+          s5Name: 'Geography', s5: 65,
+          s6Name: 'Religion Studies', s6: 68,
+          s7Enabled: false, s7Name: 'Dramatic Arts', s7: 60
+        },
+        tourism: {
+          s1Name: 'Sesotho Home Language', s1: 58,
+          s2Name: 'English First Additional Language (FAL)', s2: 55,
+          s3Name: 'Mathematical Literacy', s3: 52,
+          lo: 68,
+          s4Name: 'Tourism', s4: 64,
+          s5Name: 'Hospitality Studies', s5: 61,
+          s6Name: 'Consumer Studies', s6: 54,
+          s7Enabled: false, s7Name: 'Business Studies', s7: 50
+        }
+      };
+
+      const p = presets[presetKey];
+      if (!p) return;
+
+      document.getElementById('subj-1-name').value = p.s1Name;
+      document.getElementById('subj-2-name').value = p.s2Name;
+      document.getElementById('subj-3-name').value = p.s3Name;
+      document.getElementById('subj-4-name').value = p.s4Name;
+      document.getElementById('subj-5-name').value = p.s5Name;
+      document.getElementById('subj-6-name').value = p.s6Name;
+      document.getElementById('subj-7-name').value = p.s7Name;
+      document.getElementById('subj-7-enabled').checked = p.s7Enabled;
+
+      syncSubjInput(1, p.s1);
+      syncSubjInput(2, p.s2);
+      syncSubjInput(3, p.s3);
+      syncSubjInput('lo', p.lo);
+      syncSubjInput(4, p.s4);
+      syncSubjInput(5, p.s5);
+      syncSubjInput(6, p.s6);
+      syncSubjInput(7, p.s7);
+
+      showToast('Loaded preset learner profile into APS & Stream Matcher');
+    }
+
+    // Live NSC APS Calculator & Stream Synchronisation Engine
+    function getNSCLevel(pct) {
+      if (pct >= 80) return 7;
+      if (pct >= 70) return 6;
+      if (pct >= 60) return 5;
+      if (pct >= 50) return 4;
+      if (pct >= 40) return 3;
+      if (pct >= 30) return 2;
+      return 1;
+    }
+
+    function calculateAPS() {
+      const qualifyingSubjects = [];
+
+      // Collect Subjects 1 to 6 (20-credit subjects)
+      for (let i = 1; i <= 6; i++) {
+        const inputEl = document.getElementById('subj-' + i);
+        const nameEl = document.getElementById('subj-' + i + '-name');
+        let val = parseInt(inputEl ? inputEl.value : '0', 10);
+        if (isNaN(val) || val < 0) val = 0;
+        if (val > 100) val = 100;
+
+        const level = getNSCLevel(val);
+        const badgeEl = document.getElementById('subj-' + i + '-badge');
+        if (badgeEl) badgeEl.textContent = `Level ${level} (${val}%)`;
+
+        qualifyingSubjects.push({
+          slot: i,
+          name: nameEl ? nameEl.value : `Subject ${i}`,
+          pct: val,
+          level: level
+        });
+      }
+
+      // Check Optional 8th Subject (slot 7)
+      const s7Enabled = document.getElementById('subj-7-enabled') && document.getElementById('subj-7-enabled').checked;
+      const s7Input = document.getElementById('subj-7');
+      const s7Name = document.getElementById('subj-7-name');
+      const s7Badge = document.getElementById('subj-7-badge');
+      let s7Val = parseInt(s7Input ? s7Input.value : '0', 10);
+      if (isNaN(s7Val) || s7Val < 0) s7Val = 0;
+      if (s7Val > 100) s7Val = 100;
+      const s7Level = getNSCLevel(s7Val);
+
+      if (s7Enabled) {
+        if (s7Badge) {
+          s7Badge.textContent = `Level ${s7Level} (${s7Val}%)`;
+          s7Badge.className = 'font-mono text-[11px] px-2 py-0.5 rounded bg-sapphire-800 text-gold-100';
+        }
+        qualifyingSubjects.push({
+          slot: 7,
+          name: s7Name ? s7Name.value : '8th Subject',
+          pct: s7Val,
+          level: s7Level
+        });
+      } else if (s7Badge) {
+        s7Badge.textContent = 'Inactive';
+        s7Badge.className = 'font-mono text-[11px] px-2 py-0.5 rounded bg-slate-200 text-slate-700';
+      }
+
+      // Life Orientation (Statutory 10-credit requirement)
+      const loInput = document.getElementById('subj-lo');
+      let loVal = parseInt(loInput ? loInput.value : '0', 10);
+      if (isNaN(loVal) || loVal < 0) loVal = 0;
+      if (loVal > 100) loVal = 100;
+      const loLevel = getNSCLevel(loVal);
+      const loBadge = document.getElementById('subj-lo-badge');
+      if (loBadge) {
+        loBadge.textContent = `Level ${loLevel} (${loVal}% • ${loVal >= 30 ? 'Pass OK' : 'Below 30%'})`;
+      }
+
+      // Sort qualifying 20-credit subjects descending by percentage to take Best 6
+      const sortedBest6 = [...qualifyingSubjects].sort((a, b) => b.pct - a.pct).slice(0, 6);
+      const totalAPS = sortedBest6.reduce((acc, item) => acc + item.level, 0);
+      const avgPct = (sortedBest6.reduce((acc, item) => acc + item.pct, 0) / 6).toFixed(1);
+
+      document.getElementById('aps-total-score').textContent = `${totalAPS} / 42`;
+      document.getElementById('aps-average-pct').textContent = `Average Qualifying Subject Mark: ${avgPct}%`;
+
+      // Evaluate Statutory DBE Pass Rules
+      const hlPct = qualifyingSubjects[0].pct;
+      const falPct = qualifyingSubjects[1].pct;
+      const mathName = qualifyingSubjects[2].name;
+      const mathPct = qualifyingSubjects[2].pct;
+      const electivesAndCore50Plus = qualifyingSubjects.filter(s => s.pct >= 50).length;
+      const subjects40Plus = qualifyingSubjects.filter(s => s.pct >= 40).length;
+      const subjects30Plus = qualifyingSubjects.filter(s => s.pct >= 30).length;
+
+      const isBachelorsStatutory = hlPct >= 40 && electivesAndCore50Plus >= 4 && subjects30Plus >= 6;
+      const isDiplomaStatutory = hlPct >= 40 && subjects40Plus >= 3 && subjects30Plus >= 6;
+      const isHigherCertStatutory = hlPct >= 40 && subjects40Plus >= 2 && subjects30Plus >= 6;
+
+      let passTierTitle = '';
+      let passTierNote = '';
+      let passBadgeClass = '';
+
+      if (isBachelorsStatutory && totalAPS >= 34) {
+        passTierTitle = "Tier 1: Bachelor's Degree Pass (Competitive)";
+        passTierNote = "Meets statutory DBE Bachelor's pass rules (Home Language >= 40% and four+ 20-credit subjects >= 50%) in the high-demand APS 34 to 42 band.";
+        passBadgeClass = 'inline-block px-3 py-1 rounded-full text-xs font-mono font-bold bg-gold-cta text-sapphire-950';
+      } else if (isBachelorsStatutory) {
+        passTierTitle = "Tier 2: Bachelor's Degree Pass (Standard University Entry)";
+        passTierNote = "Meets statutory DBE Bachelor's pass rules for university degree entry. Lifting 1 or 2 subjects into the 70%+ band unlocks Tier 1 selective degrees.";
+        passBadgeClass = 'inline-block px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-400 text-sapphire-950';
+      } else if (isDiplomaStatutory) {
+        passTierTitle = 'Tier 3: National Diploma Pass (UoT & Comprehensive Entry)';
+        passTierNote = 'Meets statutory DBE Diploma pass rules (Home Language >= 40% and three+ subjects >= 40%). Qualifies for Diploma and TVET articulation streams.';
+        passBadgeClass = 'inline-block px-3 py-1 rounded-full text-xs font-mono font-bold bg-sky-300 text-sapphire-950';
+      } else if (isHigherCertStatutory) {
+        passTierTitle = 'Tier 4: Higher Certificate & TVET Articulation Tier';
+        passTierNote = 'Meets Higher Certificate statutory entry rules. Ideal for Higher Certificate bridging programmes and Motheo TVET NATED articulation.';
+        passBadgeClass = 'inline-block px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-200 text-sapphire-950';
+      } else {
+        passTierTitle = 'Pre-Pass Improvement Tier (Target Home Language >= 40% & 4 Subjects >= 50%)';
+        passTierNote = 'Your current marks need targeted mentorship support to cross the statutory Home Language (40%+) and four-subject 50%+ thresholds.';
+        passBadgeClass = 'inline-block px-3 py-1 rounded-full text-xs font-mono font-bold bg-rose-300 text-sapphire-950';
+      }
+
+      const passBadgeEl = document.getElementById('aps-pass-tier-badge');
+      passBadgeEl.textContent = passTierTitle;
+      passBadgeEl.className = passBadgeClass;
+      document.getElementById('aps-statutory-note').textContent = passTierNote;
+
+      // Evaluate and Score All 8 Embedded Mentorship Streams Based on Learner's Exact Subjects & APS
+      const selectedSubjectNames = qualifyingSubjects.map(s => s.name);
+
+      latestEvaluatedStreams = embeddedStreamsData.map(stream => {
+        const mathAllowed = stream.allowedMath.includes(mathName);
+        const mathPctMet = mathPct >= stream.minMathPct;
+        const apsMet = totalAPS >= stream.minAPS;
+        const statutoryMet = stream.requiresBachelor ? isBachelorsStatutory : (isDiplomaStatutory || isHigherCertStatutory || isBachelorsStatutory);
+
+        // Count how many of the learner's elective subjects match this stream's keySubjects
+        const matchedElectives = qualifyingSubjects.filter(s => stream.keySubjects.includes(s.name));
+        const matchedElectiveCount = matchedElectives.length;
+        const matchedElectivePoints = matchedElectives.reduce((sum, s) => sum + s.level, 0);
+
+        const isFullyEligible = mathAllowed && mathPctMet && apsMet && statutoryMet && (matchedElectiveCount >= 1 || stream.id === 'stream-06' || stream.id === 'stream-07');
+
+        // Calculate relevance score so the best-fitting stream for the learner's exact subjects ranks #1
+        let relevanceScore = (matchedElectiveCount * 30) + (matchedElectivePoints * 3);
+        if (isFullyEligible) relevanceScore += 200;
+        if (mathAllowed && mathPctMet) relevanceScore += 40;
+        if (apsMet) relevanceScore += 35;
+
+        // Special boost for highly specific subject pairs
+        if (stream.id === 'stream-01' && selectedSubjectNames.includes('Life Sciences') && selectedSubjectNames.includes('Physical Sciences') && mathName === 'Mathematics') {
+          relevanceScore += 45;
+        }
+        if (stream.id === 'stream-02' && (selectedSubjectNames.includes('Engineering Graphics and Design (EGD)') || selectedSubjectNames.includes('Technical Sciences'))) {
+          relevanceScore += 50;
+        }
+        if (stream.id === 'stream-04' && selectedSubjectNames.includes('Accounting') && mathName === 'Mathematics') {
+          relevanceScore += 50;
+        }
+        if (stream.id === 'stream-08' && (selectedSubjectNames.includes('Tourism') || selectedSubjectNames.includes('Hospitality Studies') || selectedSubjectNames.includes('Consumer Studies'))) {
+          relevanceScore += 45;
+        }
+
+        // Build reason/gap note if not yet eligible
+        const gaps = [];
+        if (!mathAllowed) gaps.push(`Requires ${stream.allowedMath.join(' or ')}`);
+        else if (!mathPctMet) gaps.push(`Lift ${mathName} to ${stream.minMathPct}%+`);
+        if (!apsMet) gaps.push(`Requires APS ${stream.minAPS}+ (currently ${totalAPS})`);
+        if (stream.requiresBachelor && !isBachelorsStatutory) gaps.push("Requires statutory Bachelor's pass");
+        if (matchedElectiveCount === 0 && stream.id !== 'stream-06' && stream.id !== 'stream-07') {
+          gaps.push('Select at least 1 matching stream elective');
+        }
+
+        return {
+          ...stream,
+          isFullyEligible,
+          matchedElectives,
+          matchedElectiveCount,
+          relevanceScore,
+          gapNote: gaps.length > 0 ? gaps.join(' • ') : 'All subject & APS benchmarks satisfied'
+        };
+      }).sort((a, b) => b.relevanceScore - a.relevanceScore);
+
+      // Update Primary Matched Stream Card inside Calculator
+      const primaryMatch = latestEvaluatedStreams[0];
+      document.getElementById('calc-matched-stream-code').textContent = `${primaryMatch.code} • APS ${primaryMatch.minAPS}-${primaryMatch.maxAPS}`;
+      document.getElementById('calc-matched-stream-title').textContent = primaryMatch.title;
+
+      const matchedSubjNames = primaryMatch.matchedElectives.map(e => `${e.name} (${e.pct}%)`).join(', ');
+      document.getElementById('calc-matched-stream-desc').textContent = primaryMatch.isFullyEligible
+        ? `Matched via ${mathName} (${mathPct}%)${matchedSubjNames ? ' and ' + matchedSubjNames : ''} with an APS of ${totalAPS}/42.`
+        : `Closest stream for your subjects (${primaryMatch.gapNote}). Work with a mentor to close this gap.`;
+
+      document.getElementById('calc-matched-stream-pathways').textContent = `Target Pathways: ${primaryMatch.pathways}`;
+      document.getElementById('calc-register-stream-btn').setAttribute(
+        'onclick',
+        `selectStreamForRegistration('${primaryMatch.formValue.replace(/'/g, "\\'")}')`
+      );
+
+      // Populate Secondary Eligible Streams Pills
+      const secondaryContainer = document.getElementById('calc-secondary-streams');
+      const otherEligible = latestEvaluatedStreams.slice(1).filter(s => s.isFullyEligible).slice(0, 3);
+      if (otherEligible.length > 0) {
+        secondaryContainer.innerHTML = otherEligible.map(s => `
+          <button type="button" onclick="selectStreamForRegistration('${s.formValue.replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-sapphire-800 hover:bg-sapphire-700 border border-gold-400/30 text-[11px] font-medium text-gold-100 transition">
+            ✓ ${s.code}: ${s.title.replace(/^Stream \d+:\s*/, '').replace(/\s*Mentorship Stream|\s*Stream/g, '')}
+          </button>
+        `).join('');
+      } else {
+        secondaryContainer.innerHTML = `<span class="text-[11px] text-slate-300">Focus on raising subject percentages to unlock additional degree and diploma streams.</span>`;
+      }
+
+      // Mentor Academic Strategy Box
+      const adviceBox = document.getElementById('aps-advice-box');
+      if (totalAPS >= 34 && isBachelorsStatutory) {
+        adviceBox.innerHTML = `<strong>Competitive University Strategy (APS ${totalAPS}):</strong> Your profile is competitive for selective university degrees. Prioritise early applications before May/June closing dates, book your National Benchmark Tests (NBTs) if applying for Health Sciences, Engineering, or Law, and apply for merit bursaries alongside NSFAS.`;
+      } else if (totalAPS >= 25 && isBachelorsStatutory) {
+        adviceBox.innerHTML = `<strong>Balanced Degree &amp; Diploma Strategy (APS ${totalAPS}):</strong> Submit applications for two Bachelor's degree programmes in <strong>${primaryMatch.code}</strong> plus one National Diploma or Extended Curriculum Programme (ECP) backup. Lifting two subjects by 5% to 8% before Trial Exams will move you into the next APS tier.`;
+      } else {
+        adviceBox.innerHTML = `<strong>Targeted Subject Upgrade &amp; Articulation Strategy (APS ${totalAPS}):</strong> Pair with a university mentor to raise any subjects sitting between 42% and 58% into the next NSC achievement level, and include Higher Certificate, Extended Diploma, and Motheo TVET / CUT articulation pathways in your applications.`;
+      }
+
+      // Update Directory Sync Summary Banner
+      const syncSummaryEl = document.getElementById('directory-sync-summary');
+      if (syncSummaryEl) {
+        syncSummaryEl.textContent = `APS ${totalAPS}/42 • ${passTierTitle} • #1 Match: ${primaryMatch.code} (${primaryMatch.title.replace(/^Stream \d+:\s*/, '')})`;
+      }
+
+      // Render the 8 Embedded Mentorship Stream Cards below
+      renderMentorshipStreams();
+    }
+
+    // Filter Controls for the 8 Embedded Mentorship Streams Directory
+    function filterStreams(filterType) {
+      activeStreamFilter = filterType;
+      const buttons = ['all', 'matched', 'bachelor', 'diploma'];
+      buttons.forEach(b => {
+        const btnEl = document.getElementById('stream-filter-' + b);
+        if (!btnEl) return;
+        if (b === filterType) {
+          btnEl.className = 'px-3 py-2 rounded-lg text-xs font-bold bg-sapphire-800 text-white shadow-sm transition';
+        } else {
+          btnEl.className = 'px-3 py-2 rounded-lg text-xs font-bold text-sapphire-800 hover:bg-white transition';
+        }
+      });
+      renderMentorshipStreams();
+    }
+
+    // Render Synchronised 8 Embedded Mentorship Stream Cards
+    function renderMentorshipStreams() {
+      const container = document.getElementById('streams-grid-container');
+      if (!container || latestEvaluatedStreams.length === 0) return;
+
+      const primaryId = latestEvaluatedStreams[0].id;
+
+      // Keep canonical Stream 01 -> Stream 08 order when viewing 'all', or rank-sorted when viewing 'matched'
+      let streamsToRender = activeStreamFilter === 'matched'
+        ? latestEvaluatedStreams.filter(s => s.isFullyEligible || s.id === primaryId)
+        : [...latestEvaluatedStreams].sort((a, b) => a.code.localeCompare(b.code));
+
+      if (activeStreamFilter === 'bachelor') {
+        streamsToRender = streamsToRender.filter(s => s.tierCategory === 'bachelor' || s.tierCategory === 'both');
+      } else if (activeStreamFilter === 'diploma') {
+        streamsToRender = streamsToRender.filter(s => s.tierCategory === 'diploma' || s.tierCategory === 'both');
+      }
+
+      container.innerHTML = streamsToRender.map(stream => {
+        const isPrimary = stream.id === primaryId && stream.isFullyEligible;
+        const isEligible = stream.isFullyEligible;
+
+        let statusBadgeHtml = '';
+        let cardBorderClass = 'border border-slate-200 bg-[#F4F7FC]';
+
+        if (isPrimary) {
+          statusBadgeHtml = `<span class="px-2.5 py-1 rounded-md bg-gold-cta text-sapphire-950 font-mono text-[10px] font-extrabold uppercase shadow-sm">★ #1 Primary Match for Your Subjects &amp; APS</span>`;
+          cardBorderClass = 'border-2 border-gold-400 bg-[#FFFFFF] shadow-md';
+        } else if (isEligible) {
+          statusBadgeHtml = `<span class="px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-300 font-mono text-[10px] font-bold uppercase">✓ Eligible Stream for Your Profile</span>`;
+          cardBorderClass = 'border-2 border-sapphire-200 bg-[#FFFFFF] shadow-sm';
+        } else {
+          statusBadgeHtml = `<span class="px-2.5 py-1 rounded-md bg-slate-200 text-slate-700 font-mono text-[10px] font-bold uppercase">APS / Subject Upgrade Required</span>`;
+        }
+
+        const matchedSubjList = stream.matchedElectives.length > 0
+          ? stream.matchedElectives.map(e => `${e.name} (${e.pct}%)`).join(', ')
+          : 'Core Languages & Mathematical Requirement';
+
+        return `
+          <div class="rounded-2xl ${cardBorderClass} p-6 sm:p-7 flex flex-col justify-between transition">
+            <div class="space-y-3.5">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                ${statusBadgeHtml}
+                <span class="font-mono text-xs font-bold text-sapphire-800">
+                  APS ${stream.minAPS} - ${stream.maxAPS} &bull; ${stream.tierLabel}
+                </span>
+              </div>
+
+              <h3 class="text-xl font-extrabold text-sapphire-900">
+                ${stream.title}
+              </h3>
+
+              <div class="p-3 rounded-xl bg-sapphire-50/80 border border-sapphire-100 text-xs space-y-1">
+                <div><strong class="text-sapphire-900">Qualifying Matric Subjects:</strong> <span class="text-slate-700">${stream.requiredSubjectsText}</span></div>
+                <div><strong class="text-sapphire-900">Your Matched Subjects:</strong> <span class="font-mono text-sapphire-800">${matchedSubjList}</span></div>
+                <div><strong class="text-sapphire-900">Profile Status:</strong> <span class="${isEligible ? 'text-emerald-800 font-semibold' : 'text-amber-800 font-semibold'}">${stream.gapNote}</span></div>
+              </div>
+
+              <p class="text-xs text-slate-600 leading-relaxed">
+                <strong class="text-slate-800">What First-Year Mentors Cover:</strong> ${stream.mentorSupport}
+              </p>
+
+              <div class="text-xs text-slate-700">
+                <strong class="text-sapphire-900">University &amp; College Pathways:</strong> ${stream.pathways}
+              </div>
+            </div>
+
+            <div class="mt-5 pt-4 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-3">
+              <span class="text-[11px] font-mono text-slate-500">${stream.code} Mentorship Track</span>
+              <button type="button" onclick="selectStreamForRegistration('${stream.formValue.replace(/'/g, "\\'")}')" class="px-4 py-2 rounded-xl ${isPrimary ? 'bg-gold-cta text-sapphire-950' : 'bg-sapphire-800 hover:bg-sapphire-700 text-white'} font-bold text-xs transition flex items-center gap-1.5">
+                <span>Select ${stream.code} for Registration</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Pre-select Stream in Bottom Registration Form and Scroll Smoothly
+    function selectStreamForRegistration(streamValue) {
+      const focusSelect = document.getElementById('form-focus');
+      if (focusSelect) {
+        let optionExists = Array.from(focusSelect.options).some(opt => opt.value === streamValue);
+        if (!optionExists) {
+          const newOpt = document.createElement('option');
+          newOpt.value = streamValue;
+          newOpt.textContent = streamValue;
+          focusSelect.appendChild(newOpt);
+        }
+        focusSelect.value = streamValue;
+      }
+      const partnerSection = document.getElementById('partner');
+      if (partnerSection) {
+        partnerSection.scrollIntoView({ behavior: 'smooth' });
+      }
+      showToast(`Selected "${streamValue}" in registration form`);
+    }
+
+    // Dual-Mode Outreach Form Switcher (High School vs University Mentor)
+    function selectFormType(mode) {
+      const schoolTab = document.getElementById('form-tab-school');
+      const mentorTab = document.getElementById('form-tab-mentor');
+      const modeInput = document.getElementById('form-mode-input');
+      const heading = document.getElementById('form-heading');
+      const subheading = document.getElementById('form-subheading');
+      const labelOrg = document.getElementById('label-org');
+      const inputOrg = document.getElementById('form-org');
+      const labelFocus = document.getElementById('label-focus');
+      const submitBtn = document.getElementById('form-submit-btn');
+
+      if (mode === 'school') {
+        schoolTab.className = 'py-2.5 px-3 rounded-lg text-xs font-bold bg-sapphire-800 text-white shadow-sm transition';
+        mentorTab.className = 'py-2.5 px-3 rounded-lg text-xs font-bold text-sapphire-800 hover:bg-sapphire-50 transition';
+        modeInput.value = 'High School Workshop or Learner Stream Registration';
+        heading.textContent = 'Request a High School Workshop or Register Your Matched Stream';
+        subheading.textContent = 'For High School Principals, Life Orientation Educators, and Grade 11/12 Learners.';
+        labelOrg.textContent = 'High School Name & Town *';
+        inputOrg.placeholder = 'e.g. Moroka Senior Secondary, Thaba Nchu';
+        labelFocus.textContent = 'Matched Mentorship Stream or Workshop Focus *';
+        submitBtn.innerHTML = `
+          <span>Submit High School / Learner Stream Registration</span>
+          <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        `;
+      } else {
+        mentorTab.className = 'py-2.5 px-3 rounded-lg text-xs font-bold bg-sapphire-800 text-white shadow-sm transition';
+        schoolTab.className = 'py-2.5 px-3 rounded-lg text-xs font-bold text-sapphire-800 hover:bg-sapphire-50 transition';
+        modeInput.value = 'University First-Year Mentor Application';
+        heading.textContent = 'Apply as an Extended University First-Year Mentor';
+        subheading.textContent = 'For University First-Year Mentors, Senior Students, and Alumni ready to mentor Grade 11 and 12 learners.';
+        labelOrg.textContent = 'University Name & Year of Study *';
+        inputOrg.placeholder = 'e.g. Wits University / UFS / CUT / UNISA (3rd Year)';
+        labelFocus.textContent = 'Your Faculty Mentorship Stream (Streams 01 to 08) *';
+        submitBtn.innerHTML = `
+          <span>Submit University Mentor Application</span>
+          <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        `;
+      }
+    }
+
+    // POPIA Modal Open/Close
+    function openPopiaModal() {
+      document.getElementById('popia-modal').classList.remove('hidden');
+    }
+
+    function closePopiaModal() {
+      document.getElementById('popia-modal').classList.add('hidden');
+    }
+
+    // Outreach Form Submit Handler
+    function handleOutreachSubmit(event) {
+      event.preventDefault();
+      const mode = document.getElementById('form-mode-input').value;
+      const name = document.getElementById('form-name').value;
+      const org = document.getElementById('form-org').value;
+      const focus = document.getElementById('form-focus').value;
+      const refNum = 'SF-' + Math.floor(100000 + Math.random() * 900000);
+
+      document.getElementById('form-ref-code').textContent = refNum;
+      document.getElementById('form-success-text').textContent = 
+        `Thank you, ${name} (${org}). Your ${mode} under "${focus}" has been logged for our Thaba Nchu mentorship coordination desk.`;
+      document.getElementById('form-success-box').classList.remove('hidden');
+      showToast('Submission recorded (' + refNum + ')');
+      event.target.reset();
+    }
+
+    // Initialise All-Subject Dropdowns and Run Initial APS + Stream Synchronisation on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      populateElectiveDropdowns();
+      calculateAPS();
+    });
+  </script>
+</body>
+</html>
